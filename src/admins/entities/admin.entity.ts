@@ -15,6 +15,9 @@ export class Admin {
   @Column() 
   password: string;
 
+  @Column({nullable: false,default: true }) 
+  check: boolean;
+
   @OneToMany(() => Product, (product) => product.admin) 
   products: Product[];
 
