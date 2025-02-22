@@ -51,9 +51,11 @@ export class ProductsService {
   }
 
   findOne(id: string): Promise< Product > {
-    return this.productRepository.findOne({where : {id},relations:{admin :true,
+    return this.productRepository.findOne({where : {id},relations:{
+      admin :true,
       category : true,
       colors : true,
+      sizes : true,
       varients : true,
       sale : true,
       tags : true,
