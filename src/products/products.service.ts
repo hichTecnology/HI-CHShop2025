@@ -45,6 +45,7 @@ export class ProductsService {
       varients : true,
       sale : true,
       tags : true,
+      sizes : true,
       medias : true
     }});
     
