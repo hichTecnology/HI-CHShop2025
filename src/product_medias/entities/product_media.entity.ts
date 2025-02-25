@@ -8,7 +8,7 @@ export class ProductMedia {
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
   
-  @ManyToOne(() => Product, (product) => product.medias) 
+  @ManyToOne(() => Product, (product) => product.medias,{ onDelete: 'CASCADE' }) 
   product: Product; 
   
   @Column() 

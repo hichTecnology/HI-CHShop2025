@@ -74,7 +74,10 @@ export class ProductsService {
   }
 
   async remove(id: string) {
-    const product = await  this.findOne(id)
+    const product = await  this.productRepository.findOne({where:{id},relations:{medias:true}})
+    if (product.medias && product.medias.length > 0) {
+      await this.MediaRepository.remove(product.medias);
+    }
     return await this.productRepository.remove(product)
   }
   private async prelaodColorsById(id :string) :Promise<Color>{
