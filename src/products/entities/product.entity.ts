@@ -37,48 +37,48 @@ export class Product {
   @Column()
   model : string;
 
-  @ManyToOne(() => Category, (category) => category.products) 
+  @ManyToOne(() => Category, (category) => category.products,{ onDelete: 'CASCADE' }) 
   category: Category;
 
-  @ManyToOne(() => Admin, (admin) => admin.products) 
+  @ManyToOne(() => Admin, (admin) => admin.products,{ onDelete: 'CASCADE' }) 
   admin: Admin;
 
-  @OneToMany(() => Review ,(review) => review.product)
+  @OneToMany(() => Review ,(review) => review.product,{ onDelete: 'CASCADE' })
   reviews : Review[];
 
-  @OneToMany(() => Favorite ,(favorite) => favorite.product)
+  @OneToMany(() => Favorite ,(favorite) => favorite.product,{ onDelete: 'CASCADE' })
   favorites : Favorite[];
 
-  @OneToMany(() => ProductView ,(product_view) => product_view.product)
+  @OneToMany(() => ProductView ,(product_view) => product_view.product,{ onDelete: 'CASCADE' })
   views: ProductView[];
 
-  @OneToMany(() => ProductMedia ,(product_media) => product_media.product)
+  @OneToMany(() => ProductMedia ,(product_media) => product_media.product,{ onDelete: 'CASCADE' })
   medias: ProductMedia[];
 
-  @OneToMany(() => Cart ,(cart) => cart.product)
+  @OneToMany(() => Cart ,(cart) => cart.product,{ onDelete: 'CASCADE' })
   carts: Cart[];
 
   @OneToOne(() => Sale)
   @JoinColumn()
   sale: Sale;
 
-  @OneToMany(() => OrderItem ,(order_item) => order_item.product)
+  @OneToMany(() => OrderItem ,(order_item) => order_item.product,{ onDelete: 'CASCADE' })
   orderItems: OrderItem[];
 
-  @OneToMany(() => Return ,(retur) => retur.product)
+  @OneToMany(() => Return ,(retur) => retur.product,{ onDelete: 'CASCADE' })
   returns: Return[];
 
-  @ManyToMany(() => Tag, (tag) => tag.products) 
+  @ManyToMany(() => Tag, (tag) => tag.products,{ onDelete: 'CASCADE' }) 
   tags: Tag[];
   
 
-  @ManyToMany(() => Color, (color) => color.products) 
+  @ManyToMany(() => Color, (color) => color.products,{ onDelete: 'CASCADE' }) 
   colors: Color[];
 
-  @ManyToMany(() => Size, (size) => size.products) 
+  @ManyToMany(() => Size, (size) => size.products,{ onDelete: 'CASCADE' }) 
   sizes: Size[];
 
-  @ManyToMany(() => Variente, (variente) => variente.products) 
+  @ManyToMany(() => Variente, (variente) => variente.products,{ onDelete: 'CASCADE' }) 
   varients: Variente[];
 
 
