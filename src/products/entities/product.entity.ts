@@ -43,29 +43,29 @@ export class Product {
   @ManyToOne(() => Admin, (admin) => admin.products,{ onDelete: 'CASCADE' }) 
   admin: Admin;
 
-  @OneToMany(() => Review ,(review) => review.product,{ onDelete: 'CASCADE' })
+  @OneToMany(() => Review ,(review) => review.product,{ cascade: true })
   reviews : Review[];
 
-  @OneToMany(() => Favorite ,(favorite) => favorite.product,{ onDelete: 'CASCADE' })
+  @OneToMany(() => Favorite ,(favorite) => favorite.product,{ cascade: true })
   favorites : Favorite[];
 
-  @OneToMany(() => ProductView ,(product_view) => product_view.product,{ onDelete: 'CASCADE' })
+  @OneToMany(() => ProductView ,(product_view) => product_view.product,{ cascade: true })
   views: ProductView[];
 
-  @OneToMany(() => ProductMedia ,(product_media) => product_media.product,{ onDelete: 'CASCADE' })
+  @OneToMany(() => ProductMedia ,(product_media) => product_media.product,{ cascade: true })
   medias: ProductMedia[];
 
-  @OneToMany(() => Cart ,(cart) => cart.product,{ onDelete: 'CASCADE' })
+  @OneToMany(() => Cart ,(cart) => cart.product,{ cascade: true })
   carts: Cart[];
 
   @OneToOne(() => Sale)
   @JoinColumn()
   sale: Sale;
 
-  @OneToMany(() => OrderItem ,(order_item) => order_item.product,{ onDelete: 'CASCADE' })
+  @OneToMany(() => OrderItem ,(order_item) => order_item.product,{ cascade: true })
   orderItems: OrderItem[];
 
-  @OneToMany(() => Return ,(retur) => retur.product,{ onDelete: 'CASCADE' })
+  @OneToMany(() => Return ,(retur) => retur.product,{ cascade: true })
   returns: Return[];
 
   @ManyToMany(() => Tag, (tag) => tag.products,{ onDelete: 'CASCADE' }) 
