@@ -6,7 +6,7 @@ export class Sale {
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
   
-  @OneToOne(() => Product, (product) => product.sale,{cascade:true}) 
+  @OneToOne(() => Product, (product) => product.sale) 
   product: Product; 
   
   @Column('decimal') 
