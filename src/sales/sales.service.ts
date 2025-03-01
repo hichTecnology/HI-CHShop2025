@@ -35,7 +35,7 @@ export class SalesService {
   }
 
   async remove(id: string) {
-    const sale = await  this.findOne(id)
+    const sale = await  this.saleRepository.findOne({where:{id}})
     return await this.saleRepository.remove(sale)
   }
 }

@@ -58,7 +58,7 @@ export class Product {
   @OneToMany(() => Cart ,(cart) => cart.product,{ cascade: true })
   carts: Cart[];
 
-  @OneToOne(() => Sale, (sale) => sale.product)
+  @OneToOne(() => Sale, (sale) => sale.product,{ onDelete: 'CASCADE' })
   @JoinColumn()
   sale: Sale;
 
