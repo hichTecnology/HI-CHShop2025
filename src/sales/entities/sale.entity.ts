@@ -6,7 +6,7 @@ export class Sale {
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
   
-  @OneToOne(() => Product, (product) => product.sale) 
+  @OneToOne(() => Product, (product) => product.sale,{ onDelete: 'SET NULL' }) 
   product: Product; 
   
   @Column('decimal') 
