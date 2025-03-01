@@ -64,13 +64,20 @@ export class ProductsService {
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
+    const colors = await Promise.all(updateProductDto.colors.map(x => this.prelaodColorsById(x)))
+    const sizes = await Promise.all(updateProductDto.sizes.map(x => this.prelaodSizesById(x)))
+    const varients = await Promise.all(updateProductDto.varients.map(x => this.prelaodVarientsById(x)))
+    const tags = await Promise.all(updateProductDto.tags.map(x => this.prelaodTagsById(x)))
+    const medias = await Promise.all(updateProductDto.medias.map(x => this.prelaodMediasById(x)))
     const product =await this.findOne(id); 
     if(!product){
       throw new NotFoundException(`this user : ${id} is not found`)
     }
 
-    Object.assign(product, updateProductDto); 
-    return this.productRepository.save(product);
+    await this.productRepository.save({id:id,...updateProductDto,colors,sizes,
+      varients,tags,medias})
+    
+    return this.productRepository.findOne({ where: { id } });
   }
 
   async remove(id: string) {
