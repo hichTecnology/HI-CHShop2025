@@ -1,5 +1,5 @@
 import { Product } from "src/products/entities/product.entity";
-import { Column, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -10,8 +10,11 @@ export class Size {
   
   @Column() 
   name: string; 
+
+  @Column({nullable: false,default: 0 }) 
+  stock: number;
   
-  @ManyToMany(() => Product, (product) => product.sizes) 
+  @ManyToOne(() => Product, (product) => product.sizes) 
   @JoinTable() 
-  products: Product[];
+  products: Product;
 }
