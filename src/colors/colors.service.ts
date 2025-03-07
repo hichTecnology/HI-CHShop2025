@@ -30,9 +30,8 @@ export class ColorsService {
     if(color){
       throw new NotFoundException(`this user : ${id} is not found`)
     }
-
-    Object.assign(color, updateColorDto); 
-    return this.colorRepository.save(color);
+    await this.colorRepository.preload(updateColorDto)
+    return this.colorRepository.findOne({ where: { id } });
   }
 
   async remove(id: string) {
