@@ -30,7 +30,7 @@ export class ColorsService {
     if(!color){
       throw new NotFoundException(`this color : ${id} is not found`)
     }
-    await this.colorRepository.save(updateColorDto)
+    await this.colorRepository.save({id:id,...updateColorDto})
     
   }
 
