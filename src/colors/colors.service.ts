@@ -26,7 +26,7 @@ export class ColorsService {
   }
 
   async update(id: string, updateColorDto: UpdateColorDto) {
-    const color =await this.findOne(id); 
+    const color =await this.colorRepository.findOne({where : {id}}); 
     if(color){
       throw new NotFoundException(`this user : ${id} is not found`)
     }
