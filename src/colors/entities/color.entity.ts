@@ -15,7 +15,7 @@ export class Color {
   @Column({nullable: false,default: 0 }) 
   stock: number;
   
-  @ManyToOne(() => Product, (product) => product.colors) 
+  @ManyToOne(() => Product, (product) => product.colors,{ onDelete: 'CASCADE' }) 
   @JoinTable() 
   products: Product;
 }

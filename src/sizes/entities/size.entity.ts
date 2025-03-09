@@ -14,7 +14,7 @@ export class Size {
   @Column({nullable: false,default: 0 }) 
   stock: number;
   
-  @ManyToOne(() => Product, (product) => product.sizes) 
+  @ManyToOne(() => Product, (product) => product.sizes,{ onDelete: 'CASCADE' }) 
   @JoinTable() 
   products: Product;
 }

@@ -72,10 +72,10 @@ export class Product {
   tags: Tag[];
   
 
-  @OneToMany(() => Color, (color) => color.products,{ onDelete: 'CASCADE' }) 
+  @OneToMany(() => Color, (color) => color.products,{ cascade: true }) 
   colors: Color[];
 
-  @OneToMany(() => Size, (size) => size.products,{ onDelete: 'CASCADE' }) 
+  @OneToMany(() => Size, (size) => size.products,{ cascade: true }) 
   sizes: Size[];
 
   @ManyToMany(() => Variente, (variente) => variente.products,{ onDelete: 'CASCADE' }) 
