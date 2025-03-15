@@ -25,6 +25,7 @@ import { CartsModule } from './carts/carts.module';
 import { OrderItemsModule } from './order_items/order_items.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { AuthUserModule } from './auth-user/auth-user.module';
 
 @Module({
   imports: [
@@ -72,7 +73,8 @@ import { ConfigModule } from '@nestjs/config';
     ProductMediasModule,
     CartsModule,
     OrderItemsModule,
-    AuthModule
+    AuthModule,
+    AuthUserModule
   ],
   controllers: [AppController],
   providers: [AppService],

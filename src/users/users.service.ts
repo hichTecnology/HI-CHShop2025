@@ -4,16 +4,30 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class UsersService {
   constructor( 
     @InjectRepository(User)
-    private userRepository: Repository<User> ) {}
+    private userRepository: Repository<User> ,
+    private jwtService: JwtService,
+  ) {}
 
-  create(createUserDto: CreateUserDto) {
-    const user = this.userRepository.create(createUserDto); 
-    return this.userRepository.save(user);
+  async create(createUserDto: CreateUserDto): Promise<{ access_token: string,id : string }> {
+    const user =  this.userRepository.create(createUserDto); 
+    const save = await this.userRepository.save(user);
+    
+    const payload = {user };
+    const token =  this.jwtService.sign(payload);
+  
+      // 3. Restituisci il token e le informazioni dell'utente
+      
+      return {
+        access_token:  token,
+        id : save.id
+      };
+    
   }
 
   findAll() : Promise< User[]> {
@@ -23,6 +37,9 @@ export class UsersService {
   findOne(id: string): Promise< User>  {
     return this.userRepository.findOne({where : {id}});
   }
+  async findOneAuth(email: string): Promise<User | undefined> {
+      return this.userRepository.findOne({where :{email}});
+    }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
     const user =await this.findOne(id); 
