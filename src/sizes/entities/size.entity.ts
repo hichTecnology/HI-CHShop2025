@@ -11,6 +11,9 @@ export class Size {
   @Column() 
   name: string; 
 
+  @Column('decimal',{nullable: false,default: 0 }) 
+  price: number;
+
   @Column({nullable: false,default: 0 }) 
   stock: number;
   

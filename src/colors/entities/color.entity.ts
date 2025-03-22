@@ -9,6 +9,9 @@ export class Color {
   @Column() 
   name: string; 
 
+  @Column('decimal',{nullable: false,default: 0 }) 
+  price: number;
+
   @Column() 
   cod: string;
   
