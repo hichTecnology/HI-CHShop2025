@@ -7,4 +7,7 @@ export class CreateSizeDto {
 
   @IsNumber()
   stock : number
+
+  @IsNumber()
+  price : number
 }

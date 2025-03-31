@@ -1,5 +1,5 @@
 import { Product } from "src/products/entities/product.entity";
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Category {
@@ -9,8 +9,16 @@ export class Category {
   @Column() 
   name: string; 
 
- 
+  @Column({ nullable: true })
+  parentId: number; 
 
-  @OneToMany(() => Product, (product) => product.category) 
+  @ManyToOne(() => Category, (category) => category.children, { nullable: true })
+  parent: Category; // La categoria padre (es. Smartphone)
+
+  @OneToMany(() => Category, (category) => category.parent)
+  children: Category[]; // Le sottocategorie (es. iPhone, Accessori)
+
+  @ManyToMany(() => Product, (product) => product.category) 
+  @JoinTable()
   products: Product[];
 }

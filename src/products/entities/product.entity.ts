@@ -37,8 +37,8 @@ export class Product {
   @Column()
   model : string;
 
-  @ManyToOne(() => Category, (category) => category.products,{ onDelete: 'CASCADE' }) 
-  category: Category;
+  @ManyToMany(() => Category, (category) => category.products,{ onDelete: 'CASCADE' }) 
+  category: Category[];
 
   @ManyToOne(() => Admin, (admin) => admin.products,{ onDelete: 'CASCADE' }) 
   admin: Admin;

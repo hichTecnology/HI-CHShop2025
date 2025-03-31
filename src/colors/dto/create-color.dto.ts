@@ -9,5 +9,8 @@ export class CreateColorDto {
   cod : string
 
   @IsNumber()
+  price : number
+
+  @IsNumber()
   stock : number
 }
