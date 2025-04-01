@@ -4,7 +4,9 @@ export class CreateCategoryDto {
   @IsString()
   name: string; 
 
-  
+  @IsNumber()
+  grado: number; 
+
   @IsOptional()
   @IsInt()
   parentId : number

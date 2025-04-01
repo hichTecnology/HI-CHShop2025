@@ -9,6 +9,9 @@ export class Category {
   @Column() 
   name: string; 
 
+  @Column({nullable: false,default: 0 }) 
+  grado: number; 
+
   @Column({ nullable: true })
   parentId: number; 
 
