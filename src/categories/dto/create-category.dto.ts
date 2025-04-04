@@ -8,7 +8,7 @@ export class CreateCategoryDto {
   grado: number; 
 
   @IsString()
-  parentId : number
+  parentId : string
   
 
   

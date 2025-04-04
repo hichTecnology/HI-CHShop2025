@@ -13,7 +13,9 @@ export class Category {
   @Column({nullable: false,default: 0 }) 
   grado: number; 
 
-  
+  @Column({ nullable: true })
+  parentId: string;
+
   @OneToMany(() => Model, (model) => model.category,{cascade: true})
   models: Model[]; // Relazione con i modelli
 
