@@ -7,8 +7,7 @@ export class CreateCategoryDto {
   @IsNumber()
   grado: number; 
 
-  @IsOptional()
-  @IsInt()
+  @IsString()
   parentId : number
   
 

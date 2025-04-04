@@ -17,7 +17,10 @@ export class CategoriesService {
   }
 
   findAll(): Promise<Category[]> {
-    return this.categoriesRepository.find({relations:{children:true}});
+    return this.categoriesRepository.find({where: { parent: null },relations:["children.models","children.children.models","models"]});
+  }
+  findGrade( grado: number): Promise<Category[]> {
+    return this.categoriesRepository.find({where: { grado: grado },relations:["children.models","children.children.models","models"]});
   }
 
   findOne(id: string): Promise<Category> {

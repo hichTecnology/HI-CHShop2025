@@ -1,3 +1,4 @@
+import { Model } from "src/model/entities/model.entity";
 import { Admin } from "src/admins/entities/admin.entity";
 import { Cart } from "src/carts/entities/cart.entity";
 import { Category } from "src/categories/entities/category.entity";
@@ -34,8 +35,7 @@ export class Product {
   @Column('int') 
   stock: number;
 
-  @Column()
-  model : string;
+  
 
   @ManyToMany(() => Category, (category) => category.products,{ onDelete: 'CASCADE' }) 
   category: Category[];
@@ -61,6 +61,10 @@ export class Product {
   @OneToOne(() => Sale, (sale) => sale.product)
   @JoinColumn()
   sale: Sale;
+
+  @OneToOne(() => Model, (model) => model.product,{ nullable: true })
+  @JoinColumn()
+  model: Model; // Relazione con i modelli
 
   @OneToMany(() => OrderItem ,(order_item) => order_item.product,{ cascade: true })
   orderItems: OrderItem[];
