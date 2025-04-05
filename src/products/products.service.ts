@@ -46,7 +46,8 @@ export class ProductsService {
       sale : true,
       tags : true,
       sizes : true,
-      medias : true
+      medias : true,
+      model:true
     }});
     
   }
