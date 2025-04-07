@@ -20,7 +20,13 @@ export class CategoriesService {
     return this.categoriesRepository.find({where: { parent: null },relations:["children.models","children.children.models","models"]});
   }
   findGrade( grado: number): Promise<Category[]> {
-    return this.categoriesRepository.find({where: { grado: grado },relations:["children.models","children.children.models","models"]});
+    return this.categoriesRepository.find({where: { grado: grado },
+      relations:["children.models","children.children.models","models"]});
+  }
+
+  findCate(name : string): Promise<Category>{
+    return this.categoriesRepository.findOne({where : {name:name},
+      relations:{products:true ,models:true,children : true}});
   }
 
   findOne(id: string): Promise<Category> {

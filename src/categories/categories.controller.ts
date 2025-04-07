@@ -18,7 +18,6 @@ export class CategoriesController {
   }
 
   @Get('/filter/:grado')
-  
   findGrade(
     @Param('grado') grado: number
   ) {
@@ -28,6 +27,11 @@ export class CategoriesController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.categoriesService.findOne(id);
+  }
+
+  @Get('/search/:name')
+  findCate(@Param('name') name: string) {
+    return this.categoriesService.findCate(name);
   }
 
   @Patch(':id')

@@ -47,7 +47,7 @@ export class ProductsService {
       tags : true,
       sizes : true,
       medias : true,
-      model:true
+      model : true
     }});
     
   }
