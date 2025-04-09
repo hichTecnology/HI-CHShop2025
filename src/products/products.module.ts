@@ -8,9 +8,10 @@ import { Size } from '@/sizes/entities/size.entity';
 import { Variente } from '@/varientes/entities/variente.entity';
 import { Tag } from '@/tags/entities/tag.entity';
 import { ProductMedia } from '@/product_medias/entities/product_media.entity';
+import { Category } from '@/categories/entities/category.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product,Color,Size,Variente,Tag,ProductMedia])],
+  imports: [TypeOrmModule.forFeature([Product,Color,Size,Variente,Tag,ProductMedia,Category])],
   controllers: [ProductsController],
   providers: [ProductsService],
 })

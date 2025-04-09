@@ -19,14 +19,18 @@ export class CreateProductDto {
   @IsString()
   adminId: string; 
   
-  @IsString()
-  categoryId: string;
+  
 
   @IsString()
   saleId: string;
 
   @IsString({each :true})
   readonly colors  : string[]
+
+  @IsString({each :true})
+  readonly category  : string[]
+
+
 
   @IsString({each :true})
   readonly sizes  : string[]

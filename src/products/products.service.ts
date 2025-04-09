@@ -9,6 +9,7 @@ import { Size } from '@/sizes/entities/size.entity';
 import { Variente } from '@/varientes/entities/variente.entity';
 import { Tag } from '@/tags/entities/tag.entity';
 import { ProductMedia } from '@/product_medias/entities/product_media.entity';
+import { Category } from '@/categories/entities/category.entity';
 
 @Injectable()
 export class ProductsService {
@@ -24,7 +25,9 @@ export class ProductsService {
     @InjectRepository(Tag)
     private tagRepository: Repository<Tag>,
     @InjectRepository(ProductMedia)
-    private MediaRepository: Repository<ProductMedia>
+    private MediaRepository: Repository<ProductMedia>,
+    @InjectRepository(Category)
+    private categoryRepository: Repository<Category>,
     
   ) {}
 
@@ -34,7 +37,8 @@ export class ProductsService {
     const varients = await Promise.all(createProductDto.varients.map(x => this.prelaodVarientsById(x)))
     const tags = await Promise.all(createProductDto.tags.map(x => this.prelaodTagsById(x)))
     const medias = await Promise.all(createProductDto.medias.map(x => this.prelaodMediasById(x)))
-    const product = this.productRepository.create({...createProductDto,colors,sizes,varients,tags,medias}); 
+    const category = await Promise.all(createProductDto.category.map(x => this.prelaodCategoryById(x)))
+    const product = this.productRepository.create({...createProductDto,colors,sizes,varients,tags,medias,category}); 
     return this.productRepository.save(product);
   }
 
@@ -70,13 +74,14 @@ export class ProductsService {
     const varients = await Promise.all(updateProductDto.varients.map(x => this.prelaodVarientsById(x)))
     const tags = await Promise.all(updateProductDto.tags.map(x => this.prelaodTagsById(x)))
     const medias = await Promise.all(updateProductDto.medias.map(x => this.prelaodMediasById(x)))
+    const category = await Promise.all(updateProductDto.category.map(x => this.prelaodCategoryById(x)))
     const product =await this.findOne(id); 
     if(!product){
       throw new NotFoundException(`this user : ${id} is not found`)
     }
 
     await this.productRepository.save({id:id,...updateProductDto,colors,sizes,
-      varients,tags,medias})
+      varients,tags,medias,category})
     
     return this.productRepository.findOne({ where: { id } });
   }
@@ -126,5 +131,13 @@ export class ProductsService {
       return media
     }
     return this.MediaRepository.create({id})
+  }
+
+  private async prelaodCategoryById(id :string) :Promise<Category>{
+    const category = await this.categoryRepository.findOne({where : {id}})
+    if(category){
+      return category
+    }
+    return this.categoryRepository.create({id})
   }
 }
