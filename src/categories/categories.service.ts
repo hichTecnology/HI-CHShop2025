@@ -26,7 +26,11 @@ export class CategoriesService {
 
   findCate(name : string): Promise<Category>{
     return this.categoriesRepository.findOne({where : {name:name},
-      relations:{products:true ,models:true,children : true}});
+      relations:["models","children","products",
+        "products.colors",
+        "products.sizes",
+        "products.varients"
+      ]});
   }
 
   findOne(id: string): Promise<Category> {
