@@ -31,7 +31,10 @@ export class CategoriesService {
         "products.sizes",
         "products.varients",
         "products.tags",
-        "models.product"
+        "models.product",
+        "models.product.colors",
+        "models.product.sizes",
+        "models.product.varients"
       ]});
   }
 
