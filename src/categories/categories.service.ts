@@ -29,7 +29,9 @@ export class CategoriesService {
       relations:["models","children","products",
         "products.colors",
         "products.sizes",
-        "products.varients"
+        "products.varients",
+        "products.tags",
+        "models.product"
       ]});
   }
 
