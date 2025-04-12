@@ -36,6 +36,7 @@ export class CategoriesService {
         "products.varients",
         "products.tags",
         "products.model",
+        "models"
         
       ]}) 
   }
@@ -48,6 +49,7 @@ export class CategoriesService {
         "products.varients",
         "products.tags",
         "products.model",
+        "models"
         
       ]}) .then(category => {
         if (!category) return null;
