@@ -45,10 +45,10 @@ export class CategoriesService {
     return await this.productRepository
       .createQueryBuilder('product')
       .innerJoinAndSelect('product.category', 'category') // Relazione con la categoria
-      .innerJoinAndSelect('product.tags', 'tag')         // Relazione con i tag
-      .innerJoinAndSelect('product.colors', 'color')
-      .innerJoinAndSelect('product.sizes', 'size')
-      .innerJoinAndSelect('product.varients', 'varient')
+      .innerJoinAndSelect('product.tags', 'tag')    // Relazione con i tag
+      .leftJoinAndSelect('product.colors', 'colors')
+      .leftJoinAndSelect('product.sizes', 'sizes')
+      .leftJoinAndSelect('product.varients', 'varients')
       .where('category.name = :categoryName', { categoryName }) // Filtro per la categoria
       .andWhere('tag.name = :tagName', { tagName })       // Filtro per il nome del tag
       .getMany();                                         // Recupera i prodotti
