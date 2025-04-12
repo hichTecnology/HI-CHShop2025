@@ -4,12 +4,16 @@ import { UpdateCategoryDto } from './dto/update-category.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from './entities/category.entity';
 import { Repository } from 'typeorm';
+import { Product } from '@/products/entities/product.entity';
 
 @Injectable()
 export class CategoriesService {
   constructor( 
     @InjectRepository(Category)
-    private categoriesRepository: Repository<Category> ) {}
+    private categoriesRepository: Repository<Category> ,
+    @InjectRepository(Product)
+    private readonly productRepository: Repository<Product>,
+  ) {}
 
   create(createCategoryDto: CreateCategoryDto) {
     const category = this.categoriesRepository.create(createCategoryDto); 
@@ -24,18 +28,44 @@ export class CategoriesService {
       relations:["children.models","children.children.models","models"]});
   }
 
-  findCate(name : string): Promise<Category>{
+  async findCate(name : string){
     return this.categoriesRepository.findOne({where : {name:name},
-      relations:["models","children","products",
+      relations:["products",
         "products.colors",
         "products.sizes",
         "products.varients",
         "products.tags",
-        "models.product",
-        "models.product.colors",
-        "models.product.sizes",
-        "models.product.varients"
-      ]});
+        
+      ]}) .then(category => {
+        if (!category) return null;
+        return category.products
+      });
+  }
+  public async getProductsByCategoryAndTag(categoryName: string, tagName: string) {
+    return await this.productRepository
+      .createQueryBuilder('product')
+      .innerJoinAndSelect('product.category', 'category') // Relazione con la categoria
+      .innerJoinAndSelect('product.tags', 'tag')         // Relazione con i tag
+      .innerJoinAndSelect('product.colors', 'color')
+      .innerJoinAndSelect('product.sizes', 'size')
+      .innerJoinAndSelect('product.varients', 'varient')
+      .where('category.name = :categoryName', { categoryName }) // Filtro per la categoria
+      .andWhere('tag.name = :tagName', { tagName })       // Filtro per il nome del tag
+      .getMany();                                         // Recupera i prodotti
+  }
+
+  public async getProductsFromCategoryWithDetails(categoryName: string, minPrice: number, maxPrice: number) {
+    return await this.categoriesRepository.findOne({
+      where: { name: categoryName },
+      relations: ['products',
+        "products.colors",
+        "products.sizes",
+        "products.varients",
+        "products.tags",]
+    }).then(category => {
+      if (!category) return null;
+      return category.products.filter(product => product.price >= minPrice && product.price <= maxPrice);
+    });
   }
 
   findOne(id: string): Promise<Category> {

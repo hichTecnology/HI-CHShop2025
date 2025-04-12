@@ -28,6 +28,26 @@ export class CategoriesController {
   findOne(@Param('id') id: string) {
     return this.categoriesService.findOne(id);
   }
+  @Get(':name/tag/products')
+    async getProductsByCategoryAndTag(
+  @Param('name') categoryName: string,
+  @Query('tag') tagName: string,
+    ) {
+  return await this.categoriesService.getProductsByCategoryAndTag(categoryName, tagName);
+  }
+
+  @Get(':name/products')
+  async getProductsFromCategoryWithDetails(
+    @Param('name') categoryName: string,
+    @Query('minPrice') minPrice: number,
+    @Query('maxPrice') maxPrice: number,
+  ) {
+    return await this.categoriesService.getProductsFromCategoryWithDetails(
+      categoryName,
+      Number(minPrice),
+      Number(maxPrice),
+    );
+  }
 
   @Get('/search/:name')
   findCate(@Param('name') name: string) {
