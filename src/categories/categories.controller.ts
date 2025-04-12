@@ -28,12 +28,21 @@ export class CategoriesController {
   findOne(@Param('id') id: string) {
     return this.categoriesService.findOne(id);
   }
+
   @Get(':name/tag/products')
     async getProductsByCategoryAndTag(
   @Param('name') categoryName: string,
   @Query('tag') tagName: string,
     ) {
   return await this.categoriesService.getProductsByCategoryAndTag(categoryName, tagName);
+  }
+
+  @Get(':name/model/products')
+    async getProductsByCategoryAndModel(
+  @Param('name') categoryName: string,
+  @Query('model') modelName: string,
+    ) {
+  return await this.categoriesService.getProductsByCategoryAndModel(categoryName, modelName);
   }
 
   @Get(':name/products')
@@ -52,6 +61,10 @@ export class CategoriesController {
   @Get('/search/:name')
   findCate(@Param('name') name: string) {
     return this.categoriesService.findCate(name);
+  }
+  @Get('/find/:name')
+  findCateModel(@Param('name') name: string) {
+    return this.categoriesService.findCateModel(name);
   }
 
   @Patch(':id')

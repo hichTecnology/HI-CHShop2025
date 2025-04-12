@@ -28,6 +28,18 @@ export class CategoriesService {
       relations:["children.models","children.children.models","models"]});
   }
 
+  async findCateModel(name : string){
+    return this.categoriesRepository.findOne({where : {name:name},
+      relations:["products",
+        "products.colors",
+        "products.sizes",
+        "products.varients",
+        "products.tags",
+        "products.model",
+        
+      ]}) 
+  }
+
   async findCate(name : string){
     return this.categoriesRepository.findOne({where : {name:name},
       relations:["products",
@@ -35,6 +47,7 @@ export class CategoriesService {
         "products.sizes",
         "products.varients",
         "products.tags",
+        "products.model",
         
       ]}) .then(category => {
         if (!category) return null;
@@ -51,6 +64,18 @@ export class CategoriesService {
       .leftJoinAndSelect('product.varients', 'varients')
       .where('category.name = :categoryName', { categoryName }) // Filtro per la categoria
       .andWhere('tag.name = :tagName', { tagName })       // Filtro per il nome del tag
+      .getMany();                                         // Recupera i prodotti
+  }
+  public async getProductsByCategoryAndModel(categoryName: string, modelName: string) {
+    return await this.productRepository
+      .createQueryBuilder('product')
+      .innerJoinAndSelect('product.category', 'category') // Relazione con la categoria
+      .innerJoinAndSelect('product.model', 'model')    // Relazione con i tag
+      .leftJoinAndSelect('product.colors', 'colors')
+      .leftJoinAndSelect('product.sizes', 'sizes')
+      .leftJoinAndSelect('product.varients', 'varients')
+      .where('category.name = :categoryName', { categoryName }) // Filtro per la categoria
+      .andWhere('model.name = :modelName', { modelName })       // Filtro per il nome del tag
       .getMany();                                         // Recupera i prodotti
   }
 
