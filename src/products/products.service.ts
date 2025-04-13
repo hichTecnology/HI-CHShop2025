@@ -3,7 +3,7 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Product } from './entities/product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { Color } from '@/colors/entities/color.entity';
 import { Size } from '@/sizes/entities/size.entity';
 import { Variente } from '@/varientes/entities/variente.entity';
@@ -65,7 +65,54 @@ export class ProductsService {
       varients : true,
       sale : true,
       tags : true,
-      medias : true}});
+      medias : true}
+    });
+  }
+
+  async getProductsByPriceRange(minPrice: number, maxPrice: number): Promise<Product[]> {
+    return this.productRepository.find({
+      where: {
+        price: Between(minPrice, maxPrice), // Range di prezzo
+      },
+      relations:{
+        admin :true,
+        category : true,
+        colors : true,
+        sizes : true,
+        varients : true,
+        sale : true,
+        tags : true,
+        medias : true}
+    });
+  }
+
+  async getProductsByPriceRangePaginated(
+    minPrice: number,
+    maxPrice: number,
+    page: number,
+    limit: number,
+  ): Promise<{ products: Product[]; total: number }> {
+    const [products, total] = await this.productRepository.findAndCount({
+      where: {
+        price: Between(minPrice, maxPrice),
+      },
+      relations:{
+        admin :true,
+        category : true,
+        colors : true,
+        sizes : true,
+        varients : true,
+        sale : true,
+        tags : true,
+        medias : true},
+      skip: (page - 1) * limit, // Salta i risultati precedenti in base alla pagina
+      take: limit, // Limita il numero di risultati
+    });
+
+    return {
+      products,
+      total, // Numero totale di prodotti nel range
+    };
   }
 
   async update(id: string, updateProductDto: UpdateProductDto) {
