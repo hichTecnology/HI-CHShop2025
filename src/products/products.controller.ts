@@ -37,7 +37,7 @@ export class ProductsController {
     return this.productsService.update(id, updateProductDto);
   }
 
-  @Get('/page/products')
+  @Get('/page/price/products')
   async getProductsLimit(
     @Query('minPrice') minPrice: string,
     @Query('maxPrice') maxPrice: string,
@@ -50,6 +50,18 @@ export class ProductsController {
     const pageSize = parseInt(limit, 10) || 10; // Valore predefinito: 10 risultati per pagina
 
     return this.productsService.getProductsByPriceRangePaginated(min, max, currentPage, pageSize);
+  }
+  @Get('/page/products')
+  async getProductsPage(
+   
+    @Query('page') page: string,
+    @Query('limit') limit: string,
+  ) {
+    
+    const currentPage = parseInt(page, 10) || 1; // Valore predefinito: pagina 1
+    const pageSize = parseInt(limit, 10) || 10; // Valore predefinito: 10 risultati per pagina
+
+    return this.productsService.getProductsByPaginated( currentPage, pageSize);
   }
 
   @Delete(':id')

@@ -115,6 +115,32 @@ export class ProductsService {
     };
   }
 
+  async getProductsByPaginated(
+    
+    page: number,
+    limit: number,
+  ): Promise<{ products: Product[]; total: number }> {
+    const [products, total] = await this.productRepository.findAndCount({
+      
+      relations:{
+        admin :true,
+        category : true,
+        colors : true,
+        sizes : true,
+        varients : true,
+        sale : true,
+        tags : true,
+        medias : true},
+      skip: (page - 1) * limit, // Salta i risultati precedenti in base alla pagina
+      take: limit, // Limita il numero di risultati
+    });
+
+    return {
+      products,
+      total, // Numero totale di prodotti nel range
+    };
+  }
+
   async update(id: string, updateProductDto: UpdateProductDto) {
     const colors = await Promise.all(updateProductDto.colors.map(x => this.prelaodColorsById(x)))
     const sizes = await Promise.all(updateProductDto.sizes.map(x => this.prelaodSizesById(x)))
