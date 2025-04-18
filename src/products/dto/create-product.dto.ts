@@ -18,8 +18,6 @@ export class CreateProductDto {
   
   @IsString()
   adminId: string; 
-  
-  
 
   @IsString()
   saleId: string;

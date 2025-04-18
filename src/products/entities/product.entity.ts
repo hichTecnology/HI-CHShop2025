@@ -35,8 +35,6 @@ export class Product {
   @Column('int') 
   stock: number;
 
-  
-
   @ManyToMany(() => Category, (category) => category.products,{ onDelete: 'CASCADE' }) 
   category: Category[];
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateFavoriteDto } from './dto/create-favorite.dto';
 import { UpdateFavoriteDto } from './dto/update-favorite.dto';
 import { Favorite } from './entities/favorite.entity';
@@ -20,15 +20,21 @@ export class FavoritesService {
     return this.favoriteRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} favorite`;
+  findOne(id: string):Promise<Favorite> {
+    return this.favoriteRepository.findOne({where : {id}});
   }
 
-  update(id: number, updateFavoriteDto: UpdateFavoriteDto) {
-    return `This action updates a #${id} favorite`;
+  async update(id: string, updateFavoriteDto: UpdateFavoriteDto) {
+    const favorite =await this.findOne(id); 
+    if(!favorite){
+      throw new NotFoundException(`this user : ${id} is not found`)
+    }
+    Object.assign(favorite, updateFavoriteDto); 
+    return this.favoriteRepository.save(favorite);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} favorite`;
+  async remove(id: string) {
+    const favorite = await  this.findOne(id)
+    return await this.favoriteRepository.remove(favorite)
   }
 }
