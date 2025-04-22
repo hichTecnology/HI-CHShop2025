@@ -6,7 +6,16 @@ export class CreateCartDto {
   
   @IsString()
   productId: string; 
+
+  @IsString()
+  size: string;
+
+  @IsString()
+  color: string;
   
+  @IsString()
+  variente: string;
+
   @IsNumber()
   quantity: number;
 }
