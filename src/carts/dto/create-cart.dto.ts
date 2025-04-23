@@ -18,4 +18,7 @@ export class CreateCartDto {
 
   @IsNumber()
   quantity: number;
+
+  @IsNumber()
+  totale: number;
 }

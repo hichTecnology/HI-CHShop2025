@@ -24,13 +24,16 @@ export class Cart {
   @Column('int') 
   quantity: number; 
 
-  @Column() 
+  @Column('decimal',{default:0,nullable : true}) 
+  totale: number; 
+
+  @Column({nullable : true}) 
   size: string; 
 
-  @Column() 
+  @Column({nullable : true}) 
   color: string; 
 
-  @Column() 
+  @Column({nullable : true}) 
   variente: string; 
   
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) 
