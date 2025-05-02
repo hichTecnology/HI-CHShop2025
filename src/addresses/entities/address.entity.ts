@@ -10,22 +10,31 @@ export class Address {
   user: User; 
   
   @Column() 
-  addressLine1: string; 
+  indirizzo1: string; 
   
   @Column({ nullable: true }) 
-  addressLine2: string; 
+  indirizzo2: string; 
   
   @Column() 
-  city: string; 
+  comune: string; 
   
   @Column() 
-  state: string; 
+  stato: string; 
   
   @Column() 
-  postalCode: number; 
+  CAP: number; 
+
+  @Column() 
+  civico: string; 
+
+  @Column() 
+  telefono: number; 
   
   @Column() 
-  country: string;
+  provincia: string;
+
+  @Column() 
+  regione: string;
   
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) 
   createdAt: Date; 

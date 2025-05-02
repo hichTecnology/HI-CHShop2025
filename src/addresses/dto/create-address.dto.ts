@@ -5,20 +5,29 @@ export class CreateAddressDto {
   userId: string; 
   
   @IsString()
-  addressLine1: string; 
+  indirizzo1: string; 
   
   @IsString()
-  addressLine2?: string; 
+  indirizzo2?: string; 
   
   @IsString()
-  city: string; 
+  comune: string; 
   
   @IsString()
-  state: string; 
+  stato: string; 
   
   @IsNumber()
-  postalCode: number; 
+  CAP: number; 
+
+  @IsNumber()
+  telefono: number;
+
+  @IsString()
+  civico: string;
   
   @IsString()
-  country: string;
+  provincia: string;
+
+  @IsString()
+  regione: string;
 }
