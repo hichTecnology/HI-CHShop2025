@@ -31,8 +31,8 @@ export class Address {
   @Column() 
   civico: string; 
 
-  @Column() 
-  telefono: number; 
+  @Column({ type: 'bigint', nullable: true }) 
+  telefono: string; 
   
   @Column() 
   provincia: string;

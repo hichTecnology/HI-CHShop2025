@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsOptional, IsString, Matches } from "class-validator";
 
 export class CreateAddressDto {
   @IsString()
@@ -19,8 +19,10 @@ export class CreateAddressDto {
   @IsNumber()
   CAP: number; 
 
-  @IsNumber()
-  telefono: number;
+  @IsOptional()
+  @IsString()
+  @Matches(/^[0-9]{7,15}$/, { message: 'Il numero di telefono non è valido' })
+  telefono?: string; // 👈 campo facoltativo
 
   @IsString()
   civico: string;
