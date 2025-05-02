@@ -6,6 +6,9 @@ export class Address {
 
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
+
+  @Column({nullable : true}) 
+  userId: string;
   
   @ManyToOne(() => User, (user) => user.addresses) 
   user: User; 
