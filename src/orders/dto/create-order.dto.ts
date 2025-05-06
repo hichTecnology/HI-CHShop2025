@@ -23,5 +23,4 @@ export class CreateOrderDto {
   @IsString()
   status: string; 
 
-  items: CreateOrderItemDto[];
 }

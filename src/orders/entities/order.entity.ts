@@ -13,7 +13,7 @@ export class Order {
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
   
-  @Column('decimal') 
+  @Column({type:'decimal',nullable:false}  ) 
   totalAmount: number; 
   
   @Column() 
