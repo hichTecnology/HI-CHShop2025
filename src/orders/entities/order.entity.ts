@@ -1,9 +1,11 @@
+import { Cart } from "@/carts/entities/cart.entity";
+import { IsString } from "class-validator";
 import { OrderItem } from "src/order_items/entities/order_item.entity";
 import { Payment } from "src/payments/entities/payment.entity";
 import { Return } from "src/returns/entities/return.entity";
 import { Shipment } from "src/shipments/entities/shipment.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Order {
@@ -16,6 +18,18 @@ export class Order {
   
   @Column() 
   status: string; 
+
+  @Column() 
+  userId: string;
+  
+  @Column({nullable : true}) 
+  paymentId: string;
+
+  @Column({nullable : true}) 
+  shipmentId: string;
+
+  @Column({nullable : true}) 
+  returnId: string;
   
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) 
   createdAt: Date; 
@@ -23,15 +37,15 @@ export class Order {
   @ManyToOne(() => User, (user) => user.orders) 
   user: User;
   
-  @OneToMany(() => Payment, (payment) => payment.order) 
-  payments: Payment[];
+  @OneToOne(() => Payment, (payment) => payment.order) 
+  payment: Payment;
 
-  @OneToMany(() => Shipment, (shipment) => shipment.order) 
-  shipments: Shipment[];
+  @OneToOne(() => Shipment, (shipment) => shipment.order) 
+  shipment: Shipment;
 
-  @OneToMany(() => Return, (retur) => retur.order) 
-  returns: Return[];
+  @OneToOne(() => Return, (retur) => retur.order) 
+  return: Return;
   
-  @OneToMany(() => OrderItem, (orderItem) => orderItem.order) 
-  items: OrderItem[];
+  @OneToMany (() => Cart ,(cart) => cart.order)
+  carts: Cart[]
 }

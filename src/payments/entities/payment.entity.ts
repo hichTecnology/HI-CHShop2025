@@ -1,5 +1,5 @@
 import { Order } from "src/orders/entities/order.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Payment {
@@ -7,7 +7,7 @@ export class Payment {
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
   
-  @ManyToOne(() => Order, (order) => order.payments) 
+  @OneToOne(() => Order, (order) => order.payment) 
   order: Order; 
   
   @Column('decimal') 

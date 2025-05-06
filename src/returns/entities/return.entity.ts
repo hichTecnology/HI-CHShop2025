@@ -1,6 +1,6 @@
 import { Order } from "src/orders/entities/order.entity";
 import { Product } from "src/products/entities/product.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Return {
@@ -8,7 +8,7 @@ export class Return {
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
   
-  @ManyToOne(() => Order, (order) => order.returns) 
+  @OneToOne(() => Order, (order) => order.return) 
   order: Order; 
   
   @ManyToOne(() => Product, (product) => product.returns) 

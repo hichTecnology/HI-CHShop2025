@@ -5,10 +5,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class OrderItem {
   @PrimaryGeneratedColumn('uuid') 
-  id: string; 
-  
-  @ManyToOne(() => Order, (order) => order.items) 
-  order: Order; 
+  id: string;  
   
   @ManyToOne(() => Product, (product) => product.orderItems) 
   product: Product; 

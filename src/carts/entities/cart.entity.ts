@@ -1,3 +1,4 @@
+import { Order } from "@/orders/entities/order.entity";
 import { Product } from "src/products/entities/product.entity";
 import { User } from "src/users/entities/user.entity";
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
@@ -34,7 +35,10 @@ export class Cart {
   color: string; 
 
   @Column({nullable : true}) 
-  variente: string; 
+  variente: string;
+  
+  @ManyToOne (() => Order ,(order) => order.carts,{nullable : true})
+  order: Order
   
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) 
   createdAt: Date; 

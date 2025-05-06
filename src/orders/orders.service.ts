@@ -4,17 +4,22 @@ import { UpdateOrderDto } from './dto/update-order.dto';
 import { Order } from './entities/order.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Cart } from '@/carts/entities/cart.entity';
 
 @Injectable()
 export class OrdersService {
 
   constructor( 
     @InjectRepository(Order)
-    private orderRepository: Repository<Order> ) {}
+    private orderRepository: Repository<Order>,
+    @InjectRepository(Cart)
+    private cartRepository: Repository<Cart>
+   ) {}
 
-  create(createOrderDto: CreateOrderDto) {
-    const order = this.orderRepository.create(createOrderDto); 
-    return this.orderRepository.save(createOrderDto);
+  async create(createOrderDto: CreateOrderDto) {
+    const carts = await Promise.all(createOrderDto.carts.map(x => this.prelaodCartsById(x)))
+    const order = this.orderRepository.create({...CreateOrderDto,carts}); 
+    return this.orderRepository.save(order);
   }
 
   findAll(): Promise<Order[]> {
@@ -26,17 +31,26 @@ export class OrdersService {
   }
 
   async update(id: string, updateOrderDto: UpdateOrderDto) {
+    const carts = await Promise.all(updateOrderDto.carts.map(x => this.prelaodCartsById(x)))
     const order =await this.findOne(id); 
     if(!order){
       throw new NotFoundException(`this user : ${id} is not found`)
     }
-
-    Object.assign(order, updateOrderDto); 
-    return this.orderRepository.save(order);
+ 
+    await this.orderRepository.save({id:id , ...updateOrderDto,carts});
+    return this.orderRepository.findOne({ where: { id } });
   }
 
   async remove(id: string) {
     const order = await  this.findOne(id)
     return await this.orderRepository.remove(order)
   }
+
+  private async prelaodCartsById(id :string) :Promise<Cart>{
+      const cart = await this.cartRepository.findOne({where : {id}})
+      if(cart){
+        return cart
+      }
+      return this.cartRepository.create({id})
+    }
 }
