@@ -22,14 +22,7 @@ export class Order {
   @Column() 
   userId: string;
   
-  @Column({nullable : true}) 
-  paymentId: string;
-
-  @Column({nullable : true}) 
-  shipmentId: string;
-
-  @Column({nullable : true}) 
-  returnId: string;
+  
   
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) 
   createdAt: Date; 

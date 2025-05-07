@@ -5,17 +5,10 @@ export class CreateOrderDto {
   @IsString()
   userId: string; 
 
-  @IsString()
-  shipmentId: string; 
-
-  @IsString()
-  paymentId: string; 
 
   @IsString({each :true})
   readonly carts  : string[]
 
-  @IsString()
-  returnId: string; 
 
   @IsNumber()
   totalAmount: number; 
