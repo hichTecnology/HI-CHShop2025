@@ -6,6 +6,9 @@ import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn 
 export class Shipment {
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
+
+  @Column() 
+  orderId: string;
   
   @OneToOne(() => Order, (order) => order.shipment) 
   order: Order; 

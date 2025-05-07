@@ -1,1 +1,18 @@
-export class CreateShipmentDto {}
+import { IsNumber, IsString } from "class-validator";
+
+export class CreateShipmentDto {
+    @IsString()
+    orderId: string; 
+
+    @IsString()
+    trackingNumber: string;
+    
+    @IsString()
+    carrier: string;
+    
+    @IsString()
+    status: string; 
+    
+    @IsNumber()
+    price: number; 
+}

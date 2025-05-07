@@ -6,6 +6,9 @@ export class Payment {
 
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
+
+  @Column() 
+  orderId: string;
   
   @OneToOne(() => Order, (order) => order.payment) 
   order: Order; 
