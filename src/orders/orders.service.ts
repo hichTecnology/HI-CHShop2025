@@ -18,7 +18,7 @@ export class OrdersService {
 
   async create(createOrderDto: CreateOrderDto) {
     const carts = await Promise.all(createOrderDto.carts.map(x => this.prelaodCartsById(x)))
-    const order = this.orderRepository.create({...CreateOrderDto,carts}); 
+    const order = this.orderRepository.create({...createOrderDto,carts}); 
     return this.orderRepository.save(order);
   }
 
