@@ -26,6 +26,5 @@ export class Shipment {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) 
   shippedAt: Date; 
   
-  @Column() 
-  expectedDelivery: Date;
+  
 }
