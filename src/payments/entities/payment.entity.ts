@@ -7,7 +7,7 @@ export class Payment {
   @PrimaryGeneratedColumn('uuid') 
   id: string; 
 
-  @Column() 
+  @Column({nullable:true}) 
   orderId: string;
   
   @OneToOne(() => Order, (order) => order.payment) 
