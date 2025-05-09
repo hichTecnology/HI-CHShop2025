@@ -38,4 +38,8 @@ export class CartsService {
     const cart = await  this.findOne(id)
     return await this.cartRepository.remove(cart)
   }
+
+  async clearUserCart(userId: string): Promise<void> {
+    await this.cartRepository.delete({ user: { id: userId } });
+  }
 }
