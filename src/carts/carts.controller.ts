@@ -32,7 +32,7 @@ export class CartsController {
     return this.cartsService.remove(id);
   }
 
-  @Delete('delete/cart:id')
+  @Delete('delete/cart/:id')
   removeCart(@Param('id') id: string) {
     return this.cartsService.clearUserCart(id);
   }

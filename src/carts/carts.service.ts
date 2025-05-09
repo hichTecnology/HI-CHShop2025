@@ -40,6 +40,6 @@ export class CartsService {
   }
 
   async clearUserCart(userId: string): Promise<void> {
-    await this.cartRepository.delete({ user: { id: userId } });
+    await this.cartRepository.update({ user: { id: userId } },{ user: null },);
   }
 }
