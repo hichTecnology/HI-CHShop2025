@@ -23,11 +23,11 @@ export class OrdersService {
   }
 
   findAll(): Promise<Order[]> {
-    return this.orderRepository.find({relations:{shipment : true,payment:true}});
+    return this.orderRepository.find({relations:['shipment','payment','carts.product']});
   }
 
   findOne(id: string): Promise<Order>  {
-    return this.orderRepository.findOne({where : {id},relations:{shipment : true ,payment : true}});
+    return this.orderRepository.findOne({where : {id},relations:['shipment','payment','carts.product']});
   }
 
   async update(id: string, updateOrderDto: UpdateOrderDto) {
