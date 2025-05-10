@@ -39,7 +39,8 @@ export class CartsService {
     return await this.cartRepository.remove(cart)
   }
 
-  async clearUserCart(userId: string): Promise<void> {
+  async clearUserCart(userId: string) {
     await this.cartRepository.update({ user: { id: userId } },{ user: null },);
+    return { message: 'Carrello scollegato' };
   }
 }
