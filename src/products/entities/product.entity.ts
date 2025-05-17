@@ -60,7 +60,7 @@ export class Product {
   @JoinColumn()
   sale: Sale;
 
-  @OneToOne(() => Model, (model) => model.product,{ nullable: true })
+  @OneToOne(() => Model, (model) => model.product,{ nullable: true ,cascade : true })
   @JoinColumn()
   model: Model; // Relazione con i modelli
 
