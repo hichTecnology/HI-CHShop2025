@@ -29,30 +29,30 @@ export class CategoriesController {
     return this.categoriesService.findOne(id);
   }
 
-  @Get(':name/tag/products')
+  @Get(':id/tag/products')
     async getProductsByCategoryAndTag(
-  @Param('name') categoryName: string,
+  @Param('id') categoryId: string,
   @Query('tag') tagName: string,
     ) {
-  return await this.categoriesService.getProductsByCategoryAndTag(categoryName, tagName);
+  return await this.categoriesService.getProductsByCategoryAndTag(categoryId, tagName);
   }
 
-  @Get(':name/model/products')
+  @Get(':id/model/products')
     async getProductsByCategoryAndModel(
-  @Param('name') categoryName: string,
+  @Param('id') categoryId: string,
   @Query('model') modelName: string,
     ) {
-  return await this.categoriesService.getProductsByCategoryAndModel(categoryName, modelName);
+  return await this.categoriesService.getProductsByCategoryAndModel(categoryId, modelName);
   }
 
-  @Get(':name/products')
+  @Get(':id/products')
   async getProductsFromCategoryWithDetails(
-    @Param('name') categoryName: string,
+    @Param('id') categoryId: string,
     @Query('minPrice') minPrice: number,
     @Query('maxPrice') maxPrice: number,
   ) {
     return await this.categoriesService.getProductsFromCategoryWithDetails(
-      categoryName,
+      categoryId,
       Number(minPrice),
       Number(maxPrice),
     );

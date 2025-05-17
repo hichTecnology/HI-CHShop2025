@@ -74,7 +74,7 @@ export class CategoriesService {
         return category.products
       });
   }
-  public async getProductsByCategoryAndTag(categoryName: string, tagName: string) {
+  public async getProductsByCategoryAndTag(categoryId: string, tagName: string) {
     return await this.productRepository
       .createQueryBuilder('product')
       .innerJoinAndSelect('product.category', 'category') // Relazione con la categoria
@@ -82,11 +82,11 @@ export class CategoriesService {
       .leftJoinAndSelect('product.colors', 'colors')
       .leftJoinAndSelect('product.sizes', 'sizes')
       .leftJoinAndSelect('product.varients', 'varients')
-      .where('category.name = :categoryName', { categoryName }) // Filtro per la categoria
+      .where('category.id = :categoryId', { categoryId }) // Filtro per la categoria
       .andWhere('tag.name = :tagName', { tagName })       // Filtro per il nome del tag
       .getMany();                                         // Recupera i prodotti
   }
-  public async getProductsByCategoryAndModel(categoryName: string, modelName: string) {
+  public async getProductsByCategoryAndModel(categoryId: string, modelName: string) {
     return await this.productRepository
       .createQueryBuilder('product')
       .innerJoinAndSelect('product.category', 'category') // Relazione con la categoria
@@ -94,14 +94,14 @@ export class CategoriesService {
       .leftJoinAndSelect('product.colors', 'colors')
       .leftJoinAndSelect('product.sizes', 'sizes')
       .leftJoinAndSelect('product.varients', 'varients')
-      .where('category.name = :categoryName', { categoryName }) // Filtro per la categoria
+      .where('category.id = :categoryId', { categoryId }) // Filtro per la categoria
       .andWhere('model.name = :modelName', { modelName })       // Filtro per il nome del tag
       .getMany();                                         // Recupera i prodotti
   }
 
-  public async getProductsFromCategoryWithDetails(categoryName: string, minPrice: number, maxPrice: number) {
+  public async getProductsFromCategoryWithDetails(categoryId: string, minPrice: number, maxPrice: number) {
     return await this.categoriesRepository.findOne({
-      where: { name: categoryName },
+      where: { id: categoryId },
       relations: ['products',
         "products.colors",
         "products.sizes",

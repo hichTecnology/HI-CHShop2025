@@ -25,7 +25,7 @@ export class Category {
   @OneToMany(() => Category, (category) => category.parent,{cascade: true})
   children: Category[]; // Le sottocategorie (es. iPhone, Accessori)
 
-  @ManyToMany(() => Product, (product) => product.category) 
+  @ManyToMany(() => Product, (product) => product.category,{cascade: true}) 
   @JoinTable()
   products: Product[];
 }
