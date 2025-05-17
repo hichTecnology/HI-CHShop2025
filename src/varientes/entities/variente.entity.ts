@@ -11,7 +11,7 @@ export class Variente {
   @Column() 
   name: string; 
 
-  @Column({nullable: false},) 
+  @Column({nullable: false ,default : 'image'},) 
   image: string;
 
   @Column('decimal',{nullable: false,default: 0 }) 

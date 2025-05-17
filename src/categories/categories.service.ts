@@ -28,6 +28,22 @@ export class CategoriesService {
       relations:["children.models","children.children.models","models"]});
   }
 
+  async cercaParent(name : string){
+    return this.categoriesRepository.findOne({where : {name:name},
+      relations:["products",
+        "products.colors",
+        "products.sizes",
+        "products.varients",
+        "products.tags",
+        "products.model",
+        "models",
+        "children"
+
+        
+      ]}) 
+
+  }
+
   async findCateModel(name : string){
     return this.categoriesRepository.findOne({where : {name:name},
       relations:["products",
@@ -36,12 +52,14 @@ export class CategoriesService {
         "products.varients",
         "products.tags",
         "products.model",
-        "models"
+        "models",
+        "children"
+
         
       ]}) 
   }
 
-  async findCate(name : string){
+  async searchCate(name : string){
     return this.categoriesRepository.findOne({where : {name:name},
       relations:["products",
         "products.colors",
@@ -96,7 +114,17 @@ export class CategoriesService {
   }
 
   findOne(id: string): Promise<Category> {
-    return this.categoriesRepository.findOne({where : {id}});
+    return this.categoriesRepository.findOne({where : {id},relations:["products",
+      "products.colors",
+      "products.sizes",
+      "products.varients",
+      "products.tags",
+      "products.model",
+      "models",
+      "children"
+
+      
+    ]});
   }
 
   async update(id: string, updateCategoryDto: UpdateCategoryDto) {

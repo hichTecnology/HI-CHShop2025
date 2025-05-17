@@ -59,8 +59,8 @@ export class CategoriesController {
   }
 
   @Get('/search/:name')
-  findCate(@Param('name') name: string) {
-    return this.categoriesService.findCate(name);
+  searchCate(@Param('name') name: string) {
+    return this.categoriesService.searchCate(name);
   }
   @Get('/find/:name')
   findCateModel(@Param('name') name: string) {
