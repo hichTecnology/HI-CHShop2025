@@ -38,10 +38,8 @@ export class CategoriesService {
         "products.model",
         "models",
         "children"
-
         
       ]}) 
-
   }
 
   async findCateModel(name : string){

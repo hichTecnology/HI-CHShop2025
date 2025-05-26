@@ -22,6 +22,11 @@ export class TagsController {
     return this.tagsService.findOne(id);
   }
 
+  @Get('/name/:id')
+  findName(@Param('name') name: string) {
+    return this.tagsService.cercaName(name);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateTagDto: UpdateTagDto) {
     return this.tagsService.update(id, updateTagDto);

@@ -17,7 +17,21 @@ export class TagsService {
   }
 
   findAll() : Promise<Tag[]> {
-    return this.tagRepository.find();
+    return this.tagRepository.find({relations:[
+      "products",
+        "products.colors",
+        "products.sizes",
+        "products.varients",
+        "products.model"
+      ]});
+  }
+  async cercaName(name : string){
+    return this.tagRepository.findOne({where : {name:name},
+      relations:["products",
+        "products.colors",
+        "products.sizes",
+        "products.varients",
+      ]}) 
   }
 
   findOne(id: string) : Promise<Tag> {
@@ -27,7 +41,7 @@ export class TagsService {
         "products.sizes",
         "products.varients",
         "products.model",
-        
+
       ]
     });
   }
