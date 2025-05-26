@@ -58,6 +58,11 @@ export class CategoriesController {
     );
   }
 
+  @Get(':name/all/products')
+getProdotti(@Param('name') name: string) {
+  return this.categoriesService.getProdottiByCategoriaId(name);
+}
+
   @Get('/search/:name')
   searchCate(@Param('name') name: string) {
     return this.categoriesService.searchCate(name);

@@ -42,6 +42,23 @@ export class CategoriesService {
       ]}) 
   }
 
+  async getProdottiByCategoriaId(categoriaName: string): Promise<Product[]> {
+    const categoria = await this.categoriesRepository.findOne({
+      where: { name: categoriaName },
+      relations: {
+        children: {
+          products: true,
+        },
+      },
+    });
+    if (!categoria) throw new NotFoundException('Categoria non trovata');
+    const prodotti: Product[] = categoria.children.flatMap(
+      (sotto) => sotto.products
+    );
+    return prodotti;
+  }
+  
+
   async findCateModel(name : string){
     return this.categoriesRepository.findOne({where : {name:name},
       relations:["products",
