@@ -13,7 +13,7 @@ import { Sale } from "src/sales/entities/sale.entity";
 import { Size } from "src/sizes/entities/size.entity";
 import { Tag } from "src/tags/entities/tag.entity";
 import { Variente } from "src/varientes/entities/variente.entity";
-import {  Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import {  Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Product {
@@ -34,6 +34,10 @@ export class Product {
 
   @Column('int') 
   stock: number;
+
+  @ManyToMany(() => Product)
+  @JoinTable() // <<< CREA AUTOMATICAMENTE LA TABELLA INTERMEDIA
+  prodottiCorrelati: Product[];
 
   @ManyToMany(() => Category, (category) => category.products,{ onDelete: 'CASCADE' }) 
   category: Category[];

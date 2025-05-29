@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsArray, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateProductDto {
   @IsString()
@@ -21,6 +21,11 @@ export class CreateProductDto {
 
   @IsString()
   saleId: string;
+
+  @IsOptional()
+  @IsArray()
+  @IsString({ each: true })
+  prodottiCorrelatiIds?: string[];
 
   @IsString({each :true})
   readonly colors  : string[]

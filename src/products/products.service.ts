@@ -206,6 +206,27 @@ export class ProductsService {
     return this.MediaRepository.create({id})
   }
 
+  async getProdottoConSuggeriti(id: string): Promise<{ prodotto: Product; suggeriti: Product[] }> {
+    const prodotto = await this.productRepository.findOne({
+      where: { id },
+      relations: ['category', 'category.children'],
+    });
+  
+    if (!prodotto) throw new NotFoundException('Prodotto non trovato');
+  
+    // Esempio: troviamo "accessori" compatibili per nome
+    const suggeriti = await this.productRepository
+      .createQueryBuilder('p')
+      .leftJoin('p.model', 'mod')
+      .where('p.id != :id', { id: prodotto.id }) // esclude sé stesso
+      .andWhere('p.name ILIKE :name', { name: `%${prodotto.name}%` }) // compatibilità per nome
+      .andWhere('mod.name ILIKE :tipo', { tipo: '%Cover%' }) // sottocategoria "accessori"
+      .limit(5)
+      .getMany();
+  
+    return { prodotto, suggeriti };
+  }
+
   private async prelaodCategoryById(id :string) :Promise<Category>{
     const category = await this.categoryRepository.findOne({where : {id}})
     if(category){
