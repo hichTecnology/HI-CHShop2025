@@ -209,7 +209,7 @@ export class ProductsService {
   async getProdottoConSuggeriti(id: string): Promise<{ prodotto: Product; suggeriti: Product[] }> {
     const prodotto = await this.productRepository.findOne({
       where: { id },
-      relations: ['category', 'category.children'],
+      relations: ['model'],
     });
   
     if (!prodotto) throw new NotFoundException('Prodotto non trovato');
