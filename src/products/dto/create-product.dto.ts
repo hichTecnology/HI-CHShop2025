@@ -33,8 +33,6 @@ export class CreateProductDto {
   @IsString({each :true})
   readonly category  : string[]
 
-
-
   @IsString({each :true})
   readonly sizes  : string[]
 
