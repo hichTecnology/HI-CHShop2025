@@ -66,7 +66,7 @@ export class Product {
 
   @ManyToMany(() => Model, (model) => model.products,{ nullable: true ,cascade : true })
   @JoinColumn()
-  models: Model; // Relazione con i modelli
+  model: Model[]; // Relazione con i modelli
 
   @OneToMany(() => OrderItem ,(order_item) => order_item.product,{ cascade: true })
   orderItems: OrderItem[];

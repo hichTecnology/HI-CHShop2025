@@ -42,6 +42,7 @@ export class CreateProductDto {
   @IsString({each :true})
   readonly tags  : string[]
 
+  
   @IsString({each :true})
   readonly  medias: string[]
 }
