@@ -16,7 +16,7 @@ export class Cart {
   @Column({nullable : true}) 
   productId: string;
   
-  @ManyToOne(() => Product, (product) => product.carts) 
+  @ManyToOne(() => Product, (product) => product.carts,{onDelete: 'CASCADE'}) 
   product: Product; 
 
   @ManyToOne(() => User, (user) => user.carts) 
