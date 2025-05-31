@@ -11,7 +11,7 @@ import { ProductMedia } from '@/product_medias/entities/product_media.entity';
 import { Category } from '@/categories/entities/category.entity';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Product,Color,Size,Variente,Tag,ProductMedia,Category])],
+  imports: [TypeOrmModule.forFeature([Product,Color,Size,Variente,Tag,ProductMedia,Category,Module])],
   controllers: [ProductsController],
   providers: [ProductsService],
 })
