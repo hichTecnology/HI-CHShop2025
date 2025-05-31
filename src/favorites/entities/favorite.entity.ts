@@ -13,7 +13,7 @@ export class Favorite {
   @Column({nullable: true})
   userId : string
   
-  @ManyToOne(() => Product, (product) => product.favorites) 
+  @ManyToOne(() => Product, (product) => product.favorites,{ onDelete: 'CASCADE'}) 
   product: Product; 
 
   @ManyToOne(() => User, (user) => user.favorites) 
