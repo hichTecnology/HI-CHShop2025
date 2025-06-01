@@ -29,14 +29,7 @@ export class TagsService {
   }
 
   findOne(id: string) : Promise<Tag> {
-    return this.tagRepository.findOne({where : {id},
-      relations:["products",
-        "products.colors",
-        "products.sizes",
-        "products.varients",
-        "products.model",
-
-      ]
+    return this.tagRepository.findOne({where : {id}
     });
   }
 
