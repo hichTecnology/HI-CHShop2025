@@ -17,13 +17,7 @@ export class TagsService {
   }
 
   findAll() : Promise<Tag[]> {
-    return this.tagRepository.find({relations:[
-      "products",
-        "products.colors",
-        "products.sizes",
-        "products.varients",
-        "products.model"
-      ]});
+    return this.tagRepository.find();
   }
   async cercaName(name : string){
     return this.tagRepository.findOne({where : {name:name},
