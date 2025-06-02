@@ -22,7 +22,7 @@ export class TagsController {
     return this.tagsService.findOne(id);
   }
 
-  @Get('/name/:id')
+  @Get('/name/:name')
   findName(@Param('name') name: string) {
     return this.tagsService.cercaName(name);
   }
