@@ -17,7 +17,13 @@ export class TagsService {
   }
 
   findAll() : Promise<Tag[]> {
-    return this.tagRepository.find();
+    return this.tagRepository.find({relations:[
+      "products",
+        "products.colors",
+        "products.sizes",
+        "products.varients",
+        
+      ]});
   }
   async cercaName(name : string){
     return this.tagRepository.findOne({where : {name:name},
@@ -29,7 +35,14 @@ export class TagsService {
   }
 
   findOne(id: string) : Promise<Tag> {
-    return this.tagRepository.findOne({where : {id}
+    return this.tagRepository.findOne({where : {id},
+      relations:["products",
+        "products.colors",
+        "products.sizes",
+        "products.varients",
+        
+
+      ]
     });
   }
 

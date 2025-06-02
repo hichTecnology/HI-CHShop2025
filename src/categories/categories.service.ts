@@ -121,7 +121,7 @@ export class CategoriesService {
         "products.colors",
         "products.sizes",
         "products.varients",
-        "products.tags",]
+        ]
     }).then(category => {
       if (!category) return null;
       return category.products.filter(product => product.price >= minPrice && product.price <= maxPrice);
