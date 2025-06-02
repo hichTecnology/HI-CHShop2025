@@ -17,7 +17,7 @@ export class ModelService {
   }
 
   findAll() {
-    return this.ModelsRepository.find({relations:{category:true}});
+    return this.ModelsRepository.find({relations:{products:true,category:true}});
   }
 
   findOne(id: string) {
