@@ -10,6 +10,7 @@ import { Variente } from '@/varientes/entities/variente.entity';
 import { Tag } from '@/tags/entities/tag.entity';
 import { ProductMedia } from '@/product_medias/entities/product_media.entity';
 import { Category } from '@/categories/entities/category.entity';
+import { Model } from '@/model/entities/model.entity';
 
 @Injectable()
 export class ProductsService {
@@ -28,6 +29,8 @@ export class ProductsService {
     private MediaRepository: Repository<ProductMedia>,
     @InjectRepository(Category)
     private categoryRepository: Repository<Category>,
+    @InjectRepository(Model)
+    private modelRepository: Repository<Model>,
     
   ) {}
 
@@ -38,7 +41,8 @@ export class ProductsService {
     const tags = await Promise.all(createProductDto.tags.map(x => this.prelaodTagsById(x)))
     const medias = await Promise.all(createProductDto.medias.map(x => this.prelaodMediasById(x)))
     const category = await Promise.all(createProductDto.category.map(x => this.prelaodCategoryById(x)))
-    const product = this.productRepository.create({...createProductDto,colors,sizes,varients,tags,medias,category}); 
+    const models = await Promise.all(createProductDto.models.map(x => this.prelaodModelsById(x)))
+    const product = this.productRepository.create({...createProductDto,colors,sizes,varients,tags,medias,models,category}); 
     return this.productRepository.save(product);
   }
 
@@ -148,13 +152,14 @@ export class ProductsService {
     const tags = await Promise.all(updateProductDto.tags.map(x => this.prelaodTagsById(x)))
     const medias = await Promise.all(updateProductDto.medias.map(x => this.prelaodMediasById(x)))
     const category = await Promise.all(updateProductDto.category.map(x => this.prelaodCategoryById(x)))
+    const models = await Promise.all(updateProductDto.models.map(x => this.prelaodModelsById(x)))
     const product =await this.findOne(id); 
     if(!product){
       throw new NotFoundException(`this user : ${id} is not found`)
     }
 
     await this.productRepository.save({id:id,...updateProductDto,colors,sizes,
-      varients,tags,medias,category})
+      varients,tags,medias,models,category})
     
     return this.productRepository.findOne({ where: { id } });
   }
@@ -180,6 +185,14 @@ export class ProductsService {
       return sizes
     }
     return this.sizeRepository.create({id})
+  }
+
+  private async prelaodModelsById(id :string) :Promise<Model>{
+    const models = await this.modelRepository.findOne({where : {id}})
+    if(models){
+      return models
+    }
+    return this.modelRepository.create({id})
   }
 
   private async prelaodVarientsById(id :string) :Promise<Variente>{
