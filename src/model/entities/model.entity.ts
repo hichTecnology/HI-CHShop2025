@@ -1,6 +1,6 @@
 import { Category } from "@/categories/entities/category.entity";
 import { Product } from "@/products/entities/product.entity";
-import { Column, Entity, JoinColumn,  ManyToMany,  ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn,  JoinTable,  ManyToMany,  ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Model {
@@ -18,5 +18,6 @@ export class Model {
   category: Category; // Relazione con la categoria
 
   @ManyToMany(() => Product, (product) => product.models, {  onDelete: 'CASCADE'})
+  @JoinTable() 
   products: Product[]; // Relazione con il prodotto
 }
