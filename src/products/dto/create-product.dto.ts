@@ -42,8 +42,7 @@ export class CreateProductDto {
   @IsString({each :true})
   readonly tags  : string[]
 
-  @IsString({each :true})
-  readonly models  : string[]
+  
 
 
   @IsString({each :true})

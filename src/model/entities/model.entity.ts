@@ -17,6 +17,5 @@ export class Model {
   @JoinColumn({ name: 'categoryId' }) // Indica la colonna di join
   category: Category; // Relazione con la categoria
 
-  @ManyToMany(() => Product, (product) => product.models, {  onDelete: 'CASCADE'})
-  products: Product[]; // Relazione con il prodotto
+  
 }
