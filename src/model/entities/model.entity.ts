@@ -18,6 +18,5 @@ export class Model {
   category: Category; // Relazione con la categoria
 
   @ManyToMany(() => Product, (product) => product.models, {  onDelete: 'CASCADE'})
-  @JoinTable() 
   products: Product[]; // Relazione con il prodotto
 }
