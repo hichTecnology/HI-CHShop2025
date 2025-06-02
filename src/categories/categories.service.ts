@@ -133,7 +133,6 @@ export class CategoriesService {
       "products.colors",
       "products.sizes",
       "products.varients",
-      "products.tags",
       "children"
     ]});
   }
