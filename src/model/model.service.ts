@@ -21,7 +21,11 @@ export class ModelService {
   }
 
   findOne(id: string) {
-    return this.ModelsRepository.findOne({where : {id}});
+    return this.ModelsRepository.findOne({where : {id},relations:["products",
+      "products.colors",
+      "products.sizes",
+      "products.varients",
+    ]});
   }
 
   async update(id: string, updateModelDto: UpdateModelDto) {

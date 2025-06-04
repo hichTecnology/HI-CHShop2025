@@ -69,6 +69,7 @@ export class ProductsService {
       varients : true,
       sale : true,
       tags : true,
+      models : true,
       medias : true}
     });
   }
