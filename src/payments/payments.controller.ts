@@ -17,6 +17,11 @@ export class PaymentsController {
     return this.paymentsService.findAll();
   }
 
+  @Post('/paypal')
+  createPaypal(@Body() dto: CreatePaymentDto) {
+    return this.paymentsService.createPaymentPaypal(dto);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.paymentsService.findOne(id);
