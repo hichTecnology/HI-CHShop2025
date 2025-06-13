@@ -8,6 +8,7 @@ async function bootstrap() {
     origin: [
       'https://hi-ch-shop2025-dashboard.vercel.app',
       'http://localhost:3000',
+      'https://www.hi-chshopping.com'
       
     ],
     methods: ["GET", "POST","DELETE","PATCH"],
