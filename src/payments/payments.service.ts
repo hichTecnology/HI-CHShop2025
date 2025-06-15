@@ -21,7 +21,7 @@ export class PaymentsService {
   }
 
   findAll() : Promise<Payment[]> {
-    return this.paymentRepository.find();
+    return this.paymentRepository.find({relations : {order : true}});
   }
 
   findOne(id: string): Promise<Payment>  {
@@ -72,16 +72,16 @@ export class PaymentsService {
       },
     );
     return data.access_token;
-  } catch (error) {
-    if (error.isAxiosError && error.response) {
+    } catch (error) {
+      if (error.isAxiosError && error.response) {
         console.error('PayPal Access Token Errore Stato:', error.response.status);
         console.error('PayPal Access Token Dati Errore:', error.response.data); // Questo è fondamentale!
         console.error('PayPal Access Token Header Errore:', error.response.headers);
-    } else {
+      } else {
         console.error('Errore inatteso nel recupero del token PayPal:', error.message);
+      }
+      throw error; // Rilancia l'errore per propagarlo
     }
-    throw error; // Rilancia l'errore per propagarlo
-}
     
   }
 
