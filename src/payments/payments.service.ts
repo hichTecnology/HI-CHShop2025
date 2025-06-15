@@ -25,7 +25,7 @@ export class PaymentsService {
   }
 
   findOne(id: string): Promise<Payment>  {
-    return this.paymentRepository.findOne({where : {id}});
+    return this.paymentRepository.findOne({where : {id},relations : {order : true}});
   }
 
   async createPaymentPaypal(dto: CreatePaymentDto) {
