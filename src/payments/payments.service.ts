@@ -60,6 +60,7 @@ export class PaymentsService {
 
   private async getPayPalAccessToken(): Promise<string> {
     const auth = Buffer.from(`${this.clientId}:${this.clientSecret}`).toString('base64');
+    try {
     const { data } = await axios.post(
       `${this.paypalApiUrl}/v1/oauth2/token`,
       'grant_type=client_credentials',
@@ -71,6 +72,17 @@ export class PaymentsService {
       },
     );
     return data.access_token;
+  } catch (error) {
+    if (error.isAxiosError && error.response) {
+        console.error('PayPal Access Token Errore Stato:', error.response.status);
+        console.error('PayPal Access Token Dati Errore:', error.response.data); // Questo è fondamentale!
+        console.error('PayPal Access Token Header Errore:', error.response.headers);
+    } else {
+        console.error('Errore inatteso nel recupero del token PayPal:', error.message);
+    }
+    throw error; // Rilancia l'errore per propagarlo
+}
+    
   }
 
   async update(id: string, updatePaymentDto: UpdatePaymentDto) {
