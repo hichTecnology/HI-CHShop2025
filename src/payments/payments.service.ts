@@ -12,8 +12,8 @@ export class PaymentsService {
     @InjectRepository(Payment)
     private paymentRepository: Repository<Payment> ) {}
     private readonly paypalApiUrl = 'https://api-m.sandbox.paypal.com';
-    private readonly clientId = process.env.PAYPAL_CLIENT_ID!;
-    private readonly clientSecret = process.env.PAYPAL_CLIENT_SECRET!;
+    private readonly clientId = "Af9VuW4mgVT6eq0BEL8uBpERIaVeJuw4v2OgBbh77QnkihN5Af8pAjCsiIFwRQeGdd1Z18C8Zc-lxUk5";
+    private readonly clientSecret = "EARqsxduOMsA28hOAVCS6QgCtwtELvVmKmN6lG1FO8GGDtaAVBk36c1VPDRrASbaI6Fd5RH3-Vu863gR";
 
   create(createPaymentDto: CreatePaymentDto) {
     const payment = this.paymentRepository.create(createPaymentDto); 
