@@ -29,10 +29,15 @@ export class PaymentsService {
   }
 
   async createPaymentPaypal(dto: CreatePaymentDto) {
+    try {
+      // Logga l'URL che stai per usare
+      console.log('Sending PayPal create payment request to URL:', `${this.paypalApiUrl}/v2/checkout/orders`); // O la tua URL corretta
+      // Logga il corpo della richiesta
+      console.log('PayPal create payment request body:'); // Assicurati di passare il payload corretto
     const token = await this.getPayPalAccessToken();
 
     const { data } = await axios.get(
-      `${this.paypalApiUrl}/v2/checkout/orders/${dto.orderId}`,
+      `${this.paypalApiUrl}/v2/checkout/orders`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -56,7 +61,17 @@ export class PaymentsService {
         verified: true,
       },
     };
+  } catch (error) {
+    if (error.isAxiosError && error.response) {
+        console.error('PayPal Create Payment Errore Stato:', error.response.status);
+        console.error('PayPal Create Payment Errore Dati:', error.response.data);
+        console.error('PayPal Create Payment Errore Headers:', error.response.headers);
+    } else {
+        console.error('Errore inatteso nella creazione del pagamento PayPal:', error.message);
+    }
+    throw error; // Rilancia l'errore
   }
+}
 
   private async getPayPalAccessToken(): Promise<string> {
     const auth = Buffer.from(`${this.clientId}:${this.clientSecret}`).toString('base64');
