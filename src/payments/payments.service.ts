@@ -37,7 +37,7 @@ export class PaymentsService {
     const token = await this.getPayPalAccessToken();
 
     const { data } = await axios.get(
-      `${this.paypalApiUrl}/v2/checkout/orders`,
+      `${this.paypalApiUrl}/v2/checkout/orders/${dto.orderId}`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -70,8 +70,7 @@ export class PaymentsService {
         console.error('Errore inatteso nella creazione del pagamento PayPal:', error.message);
     }
     throw error; // Rilancia l'errore
-  }
-}
+  }}
 
   private async getPayPalAccessToken(): Promise<string> {
     const auth = Buffer.from(`${this.clientId}:${this.clientSecret}`).toString('base64');
