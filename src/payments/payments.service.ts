@@ -11,7 +11,7 @@ export class PaymentsService {
   constructor( 
     @InjectRepository(Payment)
     private paymentRepository: Repository<Payment> ) {}
-    private readonly paypalApiUrl = 'https://api-m.sandbox.paypal.com';
+    private readonly paypalApiUrl = 'https://api-m.paypal.com';
     private readonly clientId = process.env.PAYPAL_CLIENT_ID
     private readonly clientSecret = process.env.PAYPAL_CLIENT_SECRET
 
