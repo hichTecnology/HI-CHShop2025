@@ -17,11 +17,11 @@ export class ShipmentsService {
   }
 
   findAll() : Promise< Shipment[]> {
-    return this.shipmentRepository.find();
+    return this.shipmentRepository.find({relations:["address"]});
   }
 
   findOne(id: string) : Promise< Shipment> {
-    return this.shipmentRepository.findOne({where : {id}});
+    return this.shipmentRepository.findOne({where : {id},relations:["address"]});
   }
 
   async update(id: string, updateShipmentDto: UpdateShipmentDto) {
