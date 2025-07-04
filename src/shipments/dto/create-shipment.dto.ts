@@ -5,6 +5,9 @@ export class CreateShipmentDto {
     orderId: string; 
 
     @IsString()
+    addressId: string; 
+
+    @IsString()
     trackingNumber: string;
     
     @IsString()

@@ -1,4 +1,5 @@
 
+import { Address } from "@/addresses/entities/address.entity";
 import { Order } from "src/orders/entities/order.entity";
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 
@@ -9,10 +10,17 @@ export class Shipment {
 
   @Column() 
   orderId: string;
+
+  @Column({nullable:true}) 
+  addressId: string;
   
   @OneToOne(() => Order, (order) => order.shipment) 
   @JoinColumn()
   order: Order; 
+
+  @OneToOne(() => Address, (address) => address.shipment)
+  @JoinColumn()
+  address: Address;
   
   @Column() 
   trackingNumber: string; 
@@ -22,6 +30,8 @@ export class Shipment {
   
   @Column() 
   status: string; // "In Transit", "Delivered", etc. 
+
+
 
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) 
   shippedAt: Date; 

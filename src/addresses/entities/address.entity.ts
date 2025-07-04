@@ -1,6 +1,7 @@
 
+import { Shipment } from "@/shipments/entities/shipment.entity";
 import { User } from "@/users/entities/user.entity";
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export class Address {
 
@@ -12,6 +13,9 @@ export class Address {
   
   @ManyToOne(() => User, (user) => user.addresses) 
   user: User; 
+
+  @OneToOne(() => Shipment, (shipment) => shipment.address)
+  shipment: Shipment;
   
   @Column() 
   indirizzo1: string; 
