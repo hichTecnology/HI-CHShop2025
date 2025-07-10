@@ -41,6 +41,33 @@ export class OrdersService {
     return this.orderRepository.findOne({ where: { id } });
   }
 
+  async getOrdersByPaginated(
+      
+      page: number,
+      limit: number,
+    ): Promise<{ orders: Order[]; total: number }> {
+      const [orders, total] = await this.orderRepository.findAndCount({
+        
+        relations:{
+          user : true,
+          shipment : {
+            address : true
+          },
+          payment: true,
+          carts: {
+            product: true,
+          }
+          },
+        skip: (page - 1) * limit, // Salta i risultati precedenti in base alla pagina
+        take: limit, // Limita il numero di risultati
+      });
+  
+      return {
+        orders,
+        total, // Numero totale di prodotti nel range
+      };
+    }
+
   async remove(id: string) {
     const order = await  this.findOne(id)
     return await this.orderRepository.remove(order)

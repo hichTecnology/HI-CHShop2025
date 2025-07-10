@@ -30,9 +30,7 @@ export class Shipment {
   
   @Column() 
   status: string; // "In Transit", "Delivered", etc. 
-
-
-
+  
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) 
   shippedAt: Date; 
   
