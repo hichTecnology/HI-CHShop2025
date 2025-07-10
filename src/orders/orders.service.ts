@@ -47,7 +47,9 @@ export class OrdersService {
       limit: number,
     ): Promise<{ orders: Order[]; total: number }> {
       const [orders, total] = await this.orderRepository.findAndCount({
-        
+        order: {
+          createdAt: 'DESC', // Ordine crescente
+        },
         relations:{
           user : true,
           shipment : {
