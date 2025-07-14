@@ -27,6 +27,8 @@ import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { AuthUserModule } from './auth-user/auth-user.module';
 import { ModelModule } from './model/model.module';
+import { SupportRequestModule } from './support-request/support-request.module';
+import { SupportMessageModule } from './support-message/support-message.module';
 
 @Module({
   imports: [
@@ -76,7 +78,9 @@ import { ModelModule } from './model/model.module';
     OrderItemsModule,
     AuthModule,
     AuthUserModule,
-    ModelModule
+    ModelModule,
+    SupportRequestModule,
+    SupportMessageModule
   ],
   controllers: [AppController],
   providers: [AppService],

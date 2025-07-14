@@ -1,4 +1,7 @@
 
+import { SupportMessage } from "@/support-message/entities/support-message.entity";
+import { SupportRequest } from "@/support-request/entities/support-request.entity";
+import { request } from "http";
 import { Address } from "src/addresses/entities/address.entity";
 import { Cart } from "src/carts/entities/cart.entity";
 import { Category } from "src/categories/entities/category.entity";
@@ -29,6 +32,9 @@ export class User {
   @OneToMany(() => Cart ,(cart) => cart.user)
   carts: Cart[];
 
+  @OneToMany(() => SupportRequest , (support_request) => support_request.user )
+  supportRequests : SupportRequest[]
+
   @OneToMany(() => ProductView ,(product_view) => product_view.user)
   views: ProductView[];
 
@@ -40,6 +46,9 @@ export class User {
 
   @OneToMany(() => Order ,(order) => order.user)
   orders: Order[];
+
+  @OneToMany(() => SupportMessage, (msg) => msg.userSender)
+  sentMessages: SupportMessage[];
 
   @CreateDateColumn({ type: 'timestamptz' }) 
   createdAt: Date; 
