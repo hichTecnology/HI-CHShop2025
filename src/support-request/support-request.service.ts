@@ -27,7 +27,11 @@ export class SupportRequestService {
 
   findAllMessages() : Promise< SupportMessage[]> {
     return this.messageRepo.find({relations: {supportRequest : true ,}});
-}
+  }
+
+  findOne(id: string): Promise< SupportRequest>  {
+    return this.requestRepo.findOne({where : {id},relations:{messages : {userSender:true , adminSender: true}}});
+  }
 
 async createMessage(dto: CreateSupportMessageDto) {
   const supportRequest = await this.requestRepo.findOneBy({
@@ -44,7 +48,6 @@ async createMessage(dto: CreateSupportMessageDto) {
     adminSender: dto.adminId ? { id: dto.adminId } : undefined,
     userSender: dto.userId ? { id: dto.userId } : undefined,
   });
-
   return await this.messageRepo.save(message);
 }
   

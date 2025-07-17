@@ -19,6 +19,11 @@ export class SupportRequestController {
     return this.supportService.findAllMessages();
   }
 
+  @Get('request/:id')
+  findOne(@Param('id') id: string) {
+    return this.supportService.findOne(id);
+  }
+
   @Post('request')
   createRequest(@Body() dto: CreateSupportRequestDto) {
     return this.supportService.createRequest(dto);
