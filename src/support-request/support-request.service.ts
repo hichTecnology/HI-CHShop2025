@@ -22,7 +22,7 @@ export class SupportRequestService {
   }
 
   findAll() : Promise< SupportRequest[]> {
-      return this.requestRepo.find({relations: {messages: {userSender: true, adminSender: true}}});
+      return this.requestRepo.find({relations: {messages: {userSender: true, adminSender: true},user: true}});
   }
 
   findAllMessages() : Promise< SupportMessage[]> {

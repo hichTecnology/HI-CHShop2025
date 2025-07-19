@@ -12,6 +12,6 @@ export class CreateSupportRequestDto {
   @IsString()
   status: string;
 
-  @IsNumber()
-  userId: number;
+  @IsString()
+  userId: string;
 }
