@@ -12,7 +12,7 @@ export class CreateSupportRequestDto {
   @IsString()
   status: string;
 
-  @ValidateIf(o => !o.adminId)
+  @ValidateIf(o => !o.userId)
   @IsUUID()
   userId?: string;
 }
