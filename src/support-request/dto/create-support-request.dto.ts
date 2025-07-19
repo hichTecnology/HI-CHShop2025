@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsString, IsNotEmpty, IsNumber, ValidateIf, IsUUID } from 'class-validator';
 
 export class CreateSupportRequestDto {
   @IsString()
@@ -12,6 +12,7 @@ export class CreateSupportRequestDto {
   @IsString()
   status: string;
 
-  @IsString()
-  userId: string;
+  @ValidateIf(o => !o.adminId)
+  @IsUUID()
+  userId?: string;
 }
