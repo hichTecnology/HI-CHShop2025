@@ -17,7 +17,12 @@ export class SupportRequestService {
   ) {}
 
   async createRequest(dto: CreateSupportRequestDto) {
-    const request = this.requestRepo.create(dto);
+    const request = this.requestRepo.create({
+      message: dto.message,
+      subject: dto.subject,
+      status: dto.status || 'open', // default to 'open'
+      user: dto.userId ? { id: dto.userId } : undefined,
+    });
     return await this.requestRepo.save(request);
   }
 
