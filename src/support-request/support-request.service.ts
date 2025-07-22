@@ -5,12 +5,14 @@ import { Repository } from "typeorm";
 import { SupportMessage } from "@/support-message/entities/support-message.entity";
 import { CreateSupportRequestDto } from "./dto/create-support-request.dto";
 import { CreateSupportMessageDto } from "@/support-message/dto/create-support-message.dto";
+import { SupportGateway } from "./support.gateway";
 
 @Injectable()
 export class SupportRequestService {
   constructor(
     @InjectRepository(SupportRequest)
     private requestRepo: Repository<SupportRequest>,
+    private readonly gateway: SupportGateway,
 
     @InjectRepository(SupportMessage)
     private messageRepo: Repository<SupportMessage>,
@@ -53,9 +55,11 @@ async createMessage(dto: CreateSupportMessageDto) {
     adminSender: dto.adminId ? { id: dto.adminId } : undefined,
     userSender: dto.userId ? { id: dto.userId } : undefined,
   });
-  return await this.messageRepo.save(message);
+  const savedMessage = await this.messageRepo.save(message);
+    this.gateway.sendNewMessage(savedMessage);
+  return savedMessage;
 }
-  
+ 
 
   
 

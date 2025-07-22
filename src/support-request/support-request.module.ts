@@ -8,12 +8,13 @@ import { SupportRequest } from './entities/support-request.entity';
 import { SupportMessage } from '@/support-message/entities/support-message.entity';
 import { User } from '@/users/entities/user.entity';
 import { Admin } from '@/admins/entities/admin.entity';
+import { SupportGateway } from './support.gateway';
 
 
 @Module({
   imports: [TypeOrmModule.forFeature([SupportRequest, SupportMessage,User, Admin])],
   controllers: [SupportRequestController,SupportMessageController],
-  providers: [SupportRequestService,SupportMessageService],
-  exports: [SupportRequestService],
+  providers: [SupportRequestService,SupportMessageService,SupportGateway],
+  exports: [SupportRequestService,SupportGateway],
 })
 export class SupportRequestModule {}
