@@ -4,8 +4,9 @@ import {
   SubscribeMessage,
   MessageBody,
   WebSocketServer,
+  ConnectedSocket,
 } from '@nestjs/websockets';
-import { Server } from 'socket.io';
+import { Server, Socket } from 'socket.io';
 import { SupportMessage } from '@/support-message/entities/support-message.entity';
 
 @WebSocketGateway({ cors: true }) // abilita CORS per React frontend
@@ -19,9 +20,11 @@ export class SupportGateway {
   }
 
   @SubscribeMessage('joinSupport')
-  handleJoinRoom(@MessageBody() supportRequestId: string) {
-    // Lato server, un client entra nella stanza dedicata
-    const socket = this.server.sockets; // opzionale
-    socket.adapter.rooms[supportRequestId];
+  handleJoinRoom(
+    @MessageBody() supportRequestId: string,
+    @ConnectedSocket() client: Socket
+  ) {
+    client.join(supportRequestId); // ✅ Join effettivo della stanza
+    console.log(`Client ${client.id} joined room ${supportRequestId}`);
   }
 }
