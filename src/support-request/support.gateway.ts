@@ -9,7 +9,10 @@ import {
 import { Server, Socket } from 'socket.io';
 import { SupportMessage } from '@/support-message/entities/support-message.entity';
 
-@WebSocketGateway({ cors: true }) // abilita CORS per React frontend
+@WebSocketGateway({ cors:  {
+  origin: "*", // o il dominio React/Next
+  credentials: true,
+}, }) // abilita CORS per React frontend
 export class SupportGateway {
   @WebSocketServer()
   server: Server;
