@@ -55,9 +55,14 @@ async createMessage(dto: CreateSupportMessageDto) {
     adminSender: dto.adminId ? { id: dto.adminId } : undefined,
     userSender: dto.userId ? { id: dto.userId } : undefined,
   });
+
   const savedMessage = await this.messageRepo.save(message);
-    this.gateway.sendNewMessage(savedMessage);
-  return savedMessage;
+  const fullMessage = await this.messageRepo.findOne({
+    where: { id: savedMessage.id },
+    relations: ['supportRequest', 'userSender', 'adminSender'],
+  });
+    this.gateway.sendNewMessage(fullMessage);
+  return fullMessage;
 }
  
 
