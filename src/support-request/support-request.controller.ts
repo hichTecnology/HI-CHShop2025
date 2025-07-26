@@ -29,6 +29,11 @@ export class SupportRequestController {
     return this.supportService.createRequest(dto);
   }
 
+  @Get('/users/:userId/messages')
+    async getUserMessages(@Param('userId') userId: string) {
+    return this.supportService.getMessagesByUser(userId);
+  }
+
   @Post('message')
   createMessage(@Body() dto: CreateSupportMessageDto) {
     return this.supportService.createMessage(dto);

@@ -66,7 +66,17 @@ async createMessage(dto: CreateSupportMessageDto) {
 }
  
 
-  
+async getMessagesByUser(userId: string): Promise<SupportMessage[]> {
+  return this.messageRepo.find({
+    where: {
+      userSender: { id: userId },
+    },
+    order: {
+      createdAt: 'ASC', // oppure 'DESC' se vuoi ordine inverso
+    },
+    relations: ['supportRequest'], // se ti servono join
+  });
+}
 
 
   async getMessages(supportRequestId: string) {
