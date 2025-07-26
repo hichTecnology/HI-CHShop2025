@@ -26,6 +26,11 @@ export class UsersController {
   findUserRequest(@Param('id') id: string) {
     return this.usersService.findUserRequest(id);
   }
+
+  @Get(':id/message')
+  findUserMessage(@Param('id') id: string) {
+    return this.usersService.findUserMessage(id);
+  }
   
 
   @Patch(':id')

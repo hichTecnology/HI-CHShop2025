@@ -42,6 +42,10 @@ export class UsersService {
     return this.userRepository.findOne({where : {id},relations:{supportRequests: {messages: {userSender: true, adminSender: true}}}});
   }
 
+  findUserMessage(id: string): Promise< User>  {
+    return this.userRepository.findOne({where : {id},relations:{sentMessages: {supportRequest: true, userSender: true, adminSender: true}}});
+  }
+
   async findOneAuth(email: string): Promise<User | undefined> {
       return this.userRepository.findOne({where :{email}});
     }
