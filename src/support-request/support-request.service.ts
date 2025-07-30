@@ -77,6 +77,33 @@ async getMessagesByUser(userId: string): Promise<SupportMessage[]> {
     relations: ['supportRequest'], // se ti servono join
   });
 }
+ async getSupportByPaginated(
+      
+      page: number,
+      limit: number,
+    ): Promise<{ supportRequests: SupportRequest[]; total: number }> {
+      const [supportRequests, total] = await this.requestRepo.findAndCount({
+        order: {
+          createdAt: 'DESC', // Ordine crescente
+        },
+        relations:{
+          user: true,
+          messages: {
+            userSender: true,
+            adminSender: true,
+          },
+         
+          
+          },
+        skip: (page - 1) * limit, // Salta i risultati precedenti in base alla pagina
+        take: limit, // Limita il numero di risultati
+      });
+  
+      return {
+        supportRequests: supportRequests,
+        total, // Numero totale di prodotti nel range
+      };
+    }
 
 
   async getMessages(supportRequestId: string) {

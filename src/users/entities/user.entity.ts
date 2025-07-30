@@ -1,6 +1,7 @@
 
 import { SupportMessage } from "@/support-message/entities/support-message.entity";
 import { SupportRequest } from "@/support-request/entities/support-request.entity";
+import { Exclude } from "class-transformer";
 import { request } from "http";
 import { Address } from "src/addresses/entities/address.entity";
 import { Cart } from "src/carts/entities/cart.entity";
@@ -24,6 +25,7 @@ export class User {
   email: string; 
   
   @Column() 
+  @Exclude()
   password: string;
 
   @OneToMany(() => Address ,(address) => address.user)

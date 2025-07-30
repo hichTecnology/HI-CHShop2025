@@ -16,6 +16,7 @@ export class SupportMessageController {
   findAll() {
     return this.supportMessageService.findAll();
   }
+  
 
   @Get(':id')
   findOne(@Param('id') id: string) {

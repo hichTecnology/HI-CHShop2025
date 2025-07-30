@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { SupportRequestService } from './support-request.service';
 import { CreateSupportRequestDto } from './dto/create-support-request.dto';
 import { UpdateSupportRequestDto } from './dto/update-support-request.dto';
@@ -23,6 +23,19 @@ export class SupportRequestController {
   findOne(@Param('id') id: string) {
     return this.supportService.findOne(id);
   }
+  // @Get('request/page/messages')
+  @Get('/page/messages')
+    async getProductsPage(
+     
+      @Query('page') page: string,
+      @Query('limit') limit: string,
+    ) {
+      
+      const currentPage = parseInt(page, 10) || 1; // Valore predefinito: pagina 1
+      const pageSize = parseInt(limit, 10) || 10; // Valore predefinito: 10 risultati per pagina
+  
+      return this.supportService.getSupportByPaginated( currentPage, pageSize);
+    }
 
   @Post('request')
   createRequest(@Body() dto: CreateSupportRequestDto) {
