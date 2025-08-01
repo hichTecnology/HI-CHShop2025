@@ -23,9 +23,9 @@ export class SupportRequestController {
   findOne(@Param('id') id: string) {
     return this.supportService.findOne(id);
   }
-  // @Get('request/page/messages')
+  // @Get('/page/messages')
   @Get('/page/messages')
-    async getProductsPage(
+    async getSupportByPaginated(
      
       @Query('page') page: string,
       @Query('limit') limit: string,

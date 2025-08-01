@@ -65,7 +65,10 @@ export class CategoriesService {
         "products.sizes",
         "products.varients",
         "products.tags",
-        "children"
+        "products.models",
+        "models",
+        
+        
 
         
       ]}) 
@@ -78,6 +81,7 @@ export class CategoriesService {
         "products.sizes",
         "products.varients",
         "products.tags",
+        "models",
        
         
         
