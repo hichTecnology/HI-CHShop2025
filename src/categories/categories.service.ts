@@ -106,7 +106,7 @@ export class CategoriesService {
     return await this.productRepository
       .createQueryBuilder('product')
       .innerJoinAndSelect('product.category', 'category') // Relazione con la categoria
-      .innerJoinAndSelect('product.model', 'model')    // Relazione con i tag
+      .innerJoinAndSelect('product.models', 'model')    // Relazione con i tag
       .leftJoinAndSelect('product.colors', 'colors')
       .leftJoinAndSelect('product.sizes', 'sizes')
       .leftJoinAndSelect('product.varients', 'varients')
