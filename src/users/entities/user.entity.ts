@@ -23,6 +23,9 @@ export class User {
   
   @Column() 
   email: string; 
+
+  @Column({default: false}) 
+  verifidEmail: boolean; 
   
   @Column() 
   @Exclude()
