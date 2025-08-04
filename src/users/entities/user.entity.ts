@@ -27,7 +27,7 @@ export class User {
   @Column({default: false}) 
   verifidEmail: boolean; 
   
-  @Column() 
+  @Column({nullable: true}) 
   @Exclude()
   password: string;
 
