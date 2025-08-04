@@ -34,6 +34,10 @@ export class UsersService {
     return this.userRepository.find();
   }
 
+  async findByEmail(email: string): Promise<User | null> {
+    return await this.userRepository.findOne({ where: { email } });
+  }
+
   findOne(id: string): Promise< User>  {
     return this.userRepository.findOne({where : {id},relations:['favorites.product','carts.product','addresses','orders.carts.product','orders.payment','orders.shipment','supportRequests.messages.userSender','supportRequests.messages.adminSender']});
   }
