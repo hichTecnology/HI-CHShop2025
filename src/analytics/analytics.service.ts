@@ -32,14 +32,11 @@ export class AnalyticsService {
         metrics: [{ name: 'activeUsers' }],
       },
     });
-
     const visitors = res.data.rows?.[0]?.metricValues?.[0]?.value ?? '0';
     return Number(visitors);
   }
-
   async getProductViewsById(productId: string) {
     const propertyId = 'properties/123456789';
-  
     const res = await this.analyticsDataClient.properties.runReport({
       property: propertyId,
       requestBody: {
