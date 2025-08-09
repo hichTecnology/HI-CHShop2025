@@ -8,7 +8,7 @@ export class AnalyticsService {
   private analyticsDataClient;
 
   constructor() {
-    const keyPath = join(process.cwd(), 'config', 'analytics-key.json');
+    const keyPath = join(process.cwd(), 'etc', 'secrets', 'google-analytics.json');
 
     const auth = new google.auth.GoogleAuth({
       keyFile: keyPath,
