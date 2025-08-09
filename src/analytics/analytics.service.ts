@@ -39,7 +39,7 @@ export class AnalyticsService {
     return Number(visitors);
   }
   async getProductViewsById(productId: string) {
-    const propertyId = 'properties/123456789';
+    const propertyId = 'properties/499387392';
     const res = await this.analyticsDataClient.properties.runReport({
       property: propertyId,
       requestBody: {
