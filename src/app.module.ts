@@ -29,6 +29,9 @@ import { AuthUserModule } from './auth-user/auth-user.module';
 import { ModelModule } from './model/model.module';
 import { SupportRequestModule } from './support-request/support-request.module';
 import { SupportMessageModule } from './support-message/support-message.module';
+import { AnalyticsController } from './analytics/analytics.controller';
+import { AnalyticsService } from './analytics/analytics.service';
+
 
 @Module({
   imports: [
@@ -82,7 +85,7 @@ import { SupportMessageModule } from './support-message/support-message.module';
     SupportRequestModule,
     SupportMessageModule
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController,AnalyticsController],
+  providers: [AppService,AnalyticsService],
 })
 export class AppModule {}

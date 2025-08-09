@@ -44,6 +44,7 @@ lerna-debug.log*
 .env.test.local
 .env.production.local
 .env.local
+.credentials/analytics-key.json
 
 # temp directory
 .temp
