@@ -113,5 +113,10 @@ async getMessagesByUser(userId: string): Promise<SupportMessage[]> {
       order: { createdAt: 'ASC' },
     });
   }
+  
+  async remove(id: string) {
+    const message = await this.findOne(id);
+    return await this.requestRepo.remove(message);
+  }
 }
 

@@ -27,7 +27,7 @@ export class Order {
   @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' }) 
   createdAt: Date; 
   
-  @ManyToOne(() => User, (user) => user.orders) 
+  @ManyToOne(() => User, (user) => user.orders, { onDelete: 'CASCADE' }) 
   user: User;
   
   @OneToOne(() => Payment, (payment) => payment.order) 

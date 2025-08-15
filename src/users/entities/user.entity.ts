@@ -31,28 +31,28 @@ export class User {
   @Exclude()
   password: string;
 
-  @OneToMany(() => Address ,(address) => address.user)
+  @OneToMany(() => Address ,(address) => address.user, { onDelete: 'CASCADE' })
   addresses: Address[];
 
-  @OneToMany(() => Cart ,(cart) => cart.user)
+  @OneToMany(() => Cart ,(cart) => cart.user, { onDelete: 'CASCADE' })
   carts: Cart[];
 
-  @OneToMany(() => SupportRequest , (support_request) => support_request.user )
+  @OneToMany(() => SupportRequest , (support_request) => support_request.user , { onDelete: 'CASCADE' } )
   supportRequests : SupportRequest[]
 
   @OneToMany(() => ProductView ,(product_view) => product_view.user)
   views: ProductView[];
 
-  @OneToMany(() => Favorite ,(favorite) => favorite.user)
+  @OneToMany(() => Favorite ,(favorite) => favorite.user,{ onDelete: 'CASCADE' })
   favorites: Favorite[];
 
-  @OneToMany(() => Review ,(review) => review.user)
+  @OneToMany(() => Review ,(review) => review.user,{ onDelete: 'CASCADE' })
   reviews: Review[];
 
-  @OneToMany(() => Order ,(order) => order.user)
+  @OneToMany(() => Order ,(order) => order.user ,{ onDelete: 'CASCADE' })
   orders: Order[];
 
-  @OneToMany(() => SupportMessage, (msg) => msg.userSender)
+  @OneToMany(() => SupportMessage, (msg) => msg.userSender, {  onDelete: 'CASCADE' })
   sentMessages: SupportMessage[];
 
   @CreateDateColumn({ type: 'timestamptz' }) 

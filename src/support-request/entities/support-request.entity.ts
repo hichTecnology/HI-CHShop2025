@@ -20,9 +20,9 @@ export class SupportRequest {
   @CreateDateColumn()
   createdAt: Date;
 
-  @ManyToOne(() => User, user => user.supportRequests)
+  @ManyToOne(() => User, user => user.supportRequests, { onDelete: 'CASCADE' })
   user: User;
 
-  @OneToMany(() => SupportMessage, message => message.supportRequest)
+  @OneToMany(() => SupportMessage, message => message.supportRequest, { onDelete: 'CASCADE' })
   messages: SupportMessage[];
 }

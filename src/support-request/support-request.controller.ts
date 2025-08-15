@@ -58,4 +58,9 @@ export class SupportRequestController {
   getMessages(@Param('id') id: string) {
     return this.supportService.getMessages(id);
   }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.supportService.remove(id);
+  }
 }

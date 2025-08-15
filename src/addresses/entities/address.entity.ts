@@ -11,7 +11,7 @@ export class Address {
   @Column({nullable : true}) 
   userId: string;
   
-  @ManyToOne(() => User, (user) => user.addresses) 
+  @ManyToOne(() => User, (user) => user.addresses, { onDelete: 'CASCADE' }) 
   user: User; 
 
   @OneToOne(() => Shipment, (shipment) => shipment.address)

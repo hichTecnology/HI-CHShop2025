@@ -20,7 +20,7 @@ export class SupportMessageController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.supportMessageService.findOne(+id);
+    return this.supportMessageService.findOne(id);
   }
 
   @Patch(':id')
@@ -30,6 +30,6 @@ export class SupportMessageController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.supportMessageService.remove(+id);
+    return this.supportMessageService.remove(id);
   }
 }
