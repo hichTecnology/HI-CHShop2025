@@ -14,11 +14,11 @@ export class Shipment {
   @Column({nullable:true}) 
   addressId: string;
   
-  @OneToOne(() => Order, (order) => order.shipment) 
+  @OneToOne(() => Order, (order) => order.shipment, { onDelete: 'CASCADE' }) 
   @JoinColumn()
   order: Order; 
 
-  @OneToOne(() => Address, (address) => address.shipment)
+  @OneToOne(() => Address, (address) => address.shipment, { onDelete: 'CASCADE' })
   @JoinColumn()
   address: Address;
   

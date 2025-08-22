@@ -152,7 +152,7 @@ export class ProductsService {
     const varients = await Promise.all(updateProductDto.varients.map(x => this.prelaodVarientsById(x)))
     const tags = await Promise.all(updateProductDto.tags.map(x => this.prelaodTagsById(x)))
     const medias = await Promise.all(updateProductDto.medias.map(x => this.prelaodMediasById(x)))
-    const category = await Promise.all(updateProductDto.category.map(x => this.prelaodCategoryById(x)))
+    
     const models = await Promise.all(updateProductDto.models.map(x => this.prelaodModelsById(x)))
     const product =await this.findOne(id); 
     if(!product){
@@ -160,7 +160,7 @@ export class ProductsService {
     }
 
     await this.productRepository.save({id:id,...updateProductDto,colors,sizes,
-      varients,tags,medias,models,category})
+      varients,tags,medias,models})
     
     return this.productRepository.findOne({ where: { id } });
   }

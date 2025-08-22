@@ -33,7 +33,7 @@ export class Order {
   @OneToOne(() => Payment, (payment) => payment.order) 
   payment: Payment;
 
-  @OneToOne(() => Shipment, (shipment) => shipment.order) 
+  @OneToOne(() => Shipment, (shipment) => shipment.order , { onDelete: 'CASCADE' }) 
   shipment: Shipment;
 
   @OneToOne(() => Return, (retur) => retur.order) 
