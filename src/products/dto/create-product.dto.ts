@@ -9,6 +9,9 @@ export class CreateProductDto {
   
   @IsString()
   description: string; 
+
+  @IsString()
+  numberSerial: string; 
   
   @IsNumber()
   price: number; 

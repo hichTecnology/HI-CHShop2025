@@ -29,6 +29,9 @@ export class Product {
   @Column() 
   description: string; 
 
+  @Column({default: ''}) 
+  numberSerial: string;
+
   @Column('decimal') 
   price: number; 
 
