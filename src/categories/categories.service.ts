@@ -67,10 +67,13 @@ export class CategoriesService {
         "products.tags",
         "products.models",
         "models",
-        
-        
+      ]}) 
+  }
 
-        
+  async findCateModelId(id : string){
+    return this.categoriesRepository.findOne({where : {id:id},
+      relations:[
+        "models",
       ]}) 
   }
 

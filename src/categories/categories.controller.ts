@@ -72,6 +72,11 @@ getProdotti(@Param('name') name: string) {
     return this.categoriesService.findCateModel(name);
   }
 
+  @Get('/find/id/:id')
+  findCateModelId(@Param('id') id: string) {
+    return this.categoriesService.findCateModelId(id);
+  }
+
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCategoryDto: UpdateCategoryDto) {
     return this.categoriesService.update(id, updateCategoryDto);
