@@ -118,6 +118,17 @@ export class CategoriesService {
       .getMany();                                         // Recupera i prodotti
   }
 
+  public async getProductsByModel( modelName: string) {
+    return await this.productRepository
+      .createQueryBuilder('product')
+      .innerJoinAndSelect('product.models', 'model')    // Relazione con i tag
+      .leftJoinAndSelect('product.colors', 'colors')
+      .leftJoinAndSelect('product.sizes', 'sizes')
+      .leftJoinAndSelect('product.varients', 'varients')
+      .andWhere('model.name = :modelName', { modelName })       // Filtro per il nome del tag
+      .getMany();                                         // Recupera i prodotti
+  }
+
   public async getProductsFromCategoryWithDetails(categoryId: string, minPrice: number, maxPrice: number) {
     return await this.categoriesRepository.findOne({
       where: { id: categoryId },

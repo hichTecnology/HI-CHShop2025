@@ -45,6 +45,13 @@ export class CategoriesController {
   return await this.categoriesService.getProductsByCategoryAndModel(categoryId, modelName);
   }
 
+  @Get('/:model/products')
+    async getProductsBydModel(
+  @Query('model') modelName: string,
+    ) {
+  return await this.categoriesService.getProductsByModel(modelName);
+  }
+
   @Get(':id/products')
   async getProductsFromCategoryWithDetails(
     @Param('id') categoryId: string,
