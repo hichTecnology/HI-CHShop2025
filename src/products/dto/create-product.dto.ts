@@ -1,4 +1,5 @@
-import { IsArray, IsNumber, IsOptional, IsString } from "class-validator";
+import { IsArray, IsEnum, IsNumber, IsOptional, IsString } from "class-validator";
+import { Grade } from "../entities/product.entity";
 
 export class CreateProductDto {
   @IsString()
@@ -12,6 +13,9 @@ export class CreateProductDto {
 
   @IsString()
   numberSerial: string; 
+
+  @IsNumber()
+  battery: number; 
   
   @IsNumber()
   price: number; 
@@ -24,6 +28,9 @@ export class CreateProductDto {
 
   @IsString()
   saleId: string;
+
+  @IsEnum(Grade)
+  grade: Grade;
 
   @IsOptional()
   @IsArray()

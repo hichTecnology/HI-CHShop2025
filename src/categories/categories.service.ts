@@ -5,6 +5,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Category } from './entities/category.entity';
 import { Repository } from 'typeorm';
 import { Product } from '@/products/entities/product.entity';
+import { skip } from 'node:test';
 
 @Injectable()
 export class CategoriesService {

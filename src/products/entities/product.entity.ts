@@ -1,3 +1,10 @@
+export enum Grade {
+  BUONO = 'Buono',
+  OTTIMO = 'Ottimo',
+  ECCELLENTE = 'Eccellente',
+  PREMIUM = 'Premium',
+}   
+
 import { Model } from "src/model/entities/model.entity";
 import { Admin } from "src/admins/entities/admin.entity";
 import { Cart } from "src/carts/entities/cart.entity";
@@ -32,11 +39,17 @@ export class Product {
   @Column({default: ''}) 
   numberSerial: string;
 
+  @Column({default: 0}) 
+  battery: number;
+
   @Column('decimal') 
   price: number; 
 
   @Column('int') 
   stock: number;
+
+  @Column({ type: 'enum', enum: Grade, default: Grade.BUONO })
+  grade: Grade;
 
   @ManyToMany(() => Product)
   @JoinTable() // <<< CREA AUTOMATICAMENTE LA TABELLA INTERMEDIA
