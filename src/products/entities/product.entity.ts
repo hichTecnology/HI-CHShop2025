@@ -1,8 +1,10 @@
 export enum Grade {
+  DEFAULT = 'Default',
   BUONO = 'Buono',
   OTTIMO = 'Ottimo',
   ECCELLENTE = 'Eccellente',
   PREMIUM = 'Premium',
+
 }   
 
 import { Model } from "src/model/entities/model.entity";
@@ -48,7 +50,7 @@ export class Product {
   @Column('int') 
   stock: number;
 
-  @Column({ type: 'enum', enum: Grade, default: Grade.BUONO })
+  @Column({ type: 'enum', enum: Grade, default: Grade.DEFAULT })
   grade: Grade;
 
   @ManyToMany(() => Product)
